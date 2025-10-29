@@ -6,7 +6,7 @@
 1. Tải source code về:
 
    ```bash
-   git clone https://github.com/hgbaodev/QuanLyKhoHangMayTinh.git
+   git clone https://github.com/BuiTuanIT/QuanLyKhoHangMayTinh-main
    ```
 2. Mở xampp và vào trang http://localhost/phpmyadmin/ tạo 1 database mới có tên là quanlimaytinh và import cơ sở dữ liệu trong folder database trong source code.
 
