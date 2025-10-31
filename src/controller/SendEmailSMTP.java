@@ -8,21 +8,28 @@ import java.util.Properties;
 public class SendEmailSMTP {
 
     public static void sendOTP(String emailTo, String otp) {
-        String username = "transinh085@gmail.com";
-        String password = "espehdmxgwlckipi";
+        String username = System.getenv("GMAIL_USERNAME") != null && !System.getenv("GMAIL_USERNAME").isEmpty()
+                ? System.getenv("GMAIL_USERNAME")
+                : "congtuanvlogs@gmail.com"; // fallback
+        String password = System.getenv("GMAIL_APP_PASSWORD") != null && !System.getenv("GMAIL_APP_PASSWORD").isEmpty()
+                ? System.getenv("GMAIL_APP_PASSWORD")
+                : "mckizvkbwohxwkwo"; // fallback app password
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        prop.put("mail.smtp.starttls.enable", "true"); // TLS
+        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        prop.put("mail.smtp.connectiontimeout", "10000");
+        prop.put("mail.smtp.timeout", "10000");
 
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
             Message message = new MimeMessage(session);
