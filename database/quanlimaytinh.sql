@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 24, 2025 lúc 05:22 AM
+-- Thời gian đã tạo: Th10 02, 2025 lúc 06:31 AM
 -- Phiên bản máy phục vụ: 11.4.5-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -41,10 +41,10 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`fullName`, `userName`, `password`, `role`, `status`, `email`) VALUES
-('Admin', 'admin', '$2a$12$Y87zSnx.tpFvieylSeXuo.agjb7swi3UVnoo6KVMY9xP5STj4zJhm', 'Admin', 1, 'congtuanvlogs@gmail.com'),
+('Admin', 'admin', '$2a$12$Y87zSnx.tpFvieylSeXuo.agjb7swi3UVnoo6KVMY9xP5STj4zJhm', 'Admin', 1, 'hehehe@gmail.com'),
 ('beta', 'beta', '$2a$12$89As1J0AB0yrqGjnQUHtpevc6voGyvzAd8OvzkS1vGDo3YPO2P.Ia', 'Nhân viên nhập', 1, 'j97_entertaiment@gmail.com'),
-('Bùi công tuấn', 'reddogqng', '$2a$12$PhiTGBbHjHoB3dbS6BmCC.rzdMCBqDrdK9Y8Ae8GPcKe1RpHiWARO', 'Nhân viên xuất', 1, 'congtuanvlogs@gmail.com'),
-('j97', 'thienan', '$2a$12$myOaq0kATMzNkbxgzQEkPu8ht2K0pXOGzZMZo6nSBowq6EyoLo7tS', 'Quản lý kho', 1, 'a11611112003@gmail.com');
+('Bùi công tuấn', 'reddogqng', '$2a$12$jFg3OGhZ6WskJ41AKjevnOuPNOV/75eyNbNtav3iBFU40Hx6.Imi6', 'Nhân viên xuất', 1, 'reddogqng@gmail.com'),
+('j97', 'thienan', '$2a$12$l.g3yNPdPlSI2gYzIjcNUO4heFkkBDxfOdEyV3NcUSSIZoV9Ynz.K', 'Quản lý kho', 1, 'congtuanvlogs@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -150,6 +150,7 @@ INSERT INTO `chitietphieunhap` (`maPhieu`, `maMay`, `soLuong`, `donGia`) VALUES
 ('PN37', 'LP8', 3, 18390000),
 ('PN38', 'LP23', 20, 15690000),
 ('PN38', 'LP6', 30, 17490000),
+('PN39', 'LP21', 2, 25990000),
 ('PN4', 'LP5', 1, 19290000),
 ('PN4', 'LP7', 1, 17490000),
 ('PN4', 'LP9', 1, 16490000),
@@ -247,6 +248,8 @@ INSERT INTO `chitietphieuxuat` (`maPhieu`, `maMay`, `soLuong`, `donGia`) VALUES
 ('PX26', 'LP3', 1, 15000000),
 ('PX26', 'LP5', 1, 19290000),
 ('PX26', 'LP6', 1, 17490000),
+('PX27', 'LP13', 1, 9990000),
+('PX27', 'LP15', 28, 25190000),
 ('PX3', 'LP22', 1, 23490000),
 ('PX3', 'LP4', 1, 10690000),
 ('PX3', 'LP8', 1, 18390000),
@@ -305,15 +308,15 @@ CREATE TABLE `maytinh` (
 INSERT INTO `maytinh` (`maMay`, `tenMay`, `soLuong`, `tenCpu`, `ram`, `cardManHInh`, `gia`, `mainBoard`, `congSuatNguon`, `loaiMay`, `rom`, `kichThuocMan`, `dungLuongPin`, `xuatXu`, `trangThai`) VALUES
 ('LP10', 'Laptop Lenovo IdeaPad Gaming 3', 36, 'Intel Core i5 12500H', '16 GB', 'NVIDIA GeForce RTX 3050', 23490000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 0),
 ('LP12', 'Laptop MSI Modern 14 B11MOU-1028VN', 23, 'Intel Core i3 115G4', '8 GB', 'Intel UHD Graphics', 13090000, NULL, NULL, 'Laptop', '256 GB', 14, '3 Cell', 'Trung Quốc', 0),
-('LP13', 'Laptop HP 15s-fq2663TU', 19, 'Intel Core i3 1115G4', '4 GB', 'Intel UHD Graphics', 9990000, NULL, NULL, 'Laptop', '256 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
+('LP13', 'Laptop HP 15s-fq2663TU', 18, 'Intel Core i3 1115G4', '4 GB', 'Intel UHD Graphics', 9990000, NULL, NULL, 'Laptop', '256 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
 ('LP14', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 3, 'Intel Core i5 12500H', '16 GB', 'Intel Iris Xe Graphics', 22490000, NULL, NULL, 'Laptop', '512 GB', 16, '4 Cell', 'Trung Quốc', 1),
-('LP15', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 28, 'Intel Core i7 12700H', '16 GB', 'Intel Iris Xe Graphics', 25190000, NULL, NULL, 'Laptop', '512 GB', 16, '75 Wh', 'Trung Quốc', 1),
+('LP15', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 0, 'Intel Core i7 12700H', '16 GB', 'Intel Iris Xe Graphics', 25190000, NULL, NULL, 'Laptop', '512 GB', 16, '75 Wh', 'Trung Quốc', 1),
 ('LP16', 'Laptop Acer Nitro Gaming AN515-57-54MV', 62, 'Intel Core i5 11400H', '8', 'NVIDIA GeForce RTX 3050', 22990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell ', 'Trung Quốc', 1),
 ('LP17', 'Laptop MSI Gaming Katana GF66 12UCK-815VN', 22, 'Intel Core i5 12450H', '8 GB', 'Intel UHD Graphics', 23190000, NULL, NULL, 'Laptop', '512 GB', 15.6, '53.5 Wh', 'Trung Quốc', 1),
 ('LP18', 'Laptop Asus TUF Gaming FX517ZC-HN077W', 23, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050', 24990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1),
 ('LP19', 'Laptop HP Gaming Victus 16-e0175AX', 18, 'AMD Ryzen 5 5600H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 19490000, NULL, NULL, 'Laptop', '512 GB', 16.1, '4 Cell', 'Trung Quốc', 1),
 ('LP20', 'Laptop MSI GF63 Thin 11UC-444VN', 19, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce RTX 3050', 20790000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP21', 'Laptop Asus TUF Gaming FX517ZE-HN045W', 16, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 25990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1),
+('LP21', 'Laptop Asus TUF Gaming FX517ZE-HN045W', 18, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 25990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1),
 ('LP22', 'Laptop Lenovo Yoga Slim 7 Pro 14IHU5O', 20, 'Intel Core i5 11300H', '16 GB', 'Intel Iris Xe Graphics', 23490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell ', 'Trung Quốc', 1),
 ('LP23', 'Laptop Gigabyte U4 UD-50VN823SO', 37, 'Intel Core i5 1155G7', '16 GB', 'Intel Iris Xe Graphics', 15690000, NULL, NULL, 'Laptop', '512 GB', 14, '36 Wh', 'Trung Quốc', 1),
 ('LP24', 'Laptop Dell Vostro V5410 i5', 34, 'Intel Core i5 11320H', '8 GB', 'Intel Iris Xe Graphics', 21490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell', 'Trung Quốc', 1),
@@ -380,44 +383,45 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`maPhieu`, `thoiGianTao`, `nguoiTao`, `maNhaCungCap`, `tongTien`) VALUES
-('PN1', '2025-10-24 01 13:59:09', 'admin', 'FPT', 42980000),
-('PN10', '2025-10-24 07 18:04:19', 'admin', 'HOANGPHAT', 112440000),
-('PN11', '2025-10-24 07 18:48:21', 'admin', 'FPT', 98300000),
-('PN12', '2025-10-24 16 02:19:48', 'admin', 'HACOM', 39880000),
-('PN13', '2025-10-24 16 02:19:36', 'admin', 'PHONGVU', 38980000),
-('PN14', '2025-10-24 08 12:28:57', 'admin', 'FPT', 50970000),
-('PN15', '2025-10-24 08 12:36:25', 'admin', 'FPT', 39980000),
-('PN16', '2025-10-24 08 16:30:48', 'admin', 'HOANGPHAT', 52170000),
-('PN17', '2025-10-24 09 14:29:43', 'admin', 'FPT', 30180000),
-('PN18', '2025-10-24 09 17:08:19', 'admin', 'FPT', 78750000),
-('PN19', '2025-10-24 12 07:09:21', 'admin', 'PHONGVU', 66860000),
-('PN2', '2025-10-24 01 13:59:23', 'admin', 'FPT', 46780000),
-('PN20', '2025-10-24 00:19:46:37', 'admin', 'PHONGVU', 233270000),
-('PN21', '2025-10-24 14 11:54:21', 'admin', 'PHONGVU', 1536180000),
-('PN22', '2025-10-24 14 12:32:09', 'admin', 'FPT', 89660000),
-('PN23', '2025-10-24 14 14:28:52', 'admin', 'FPT', 112540000),
-('PN24', '2025-10-24 14 14:41:23', 'admin', 'FPT', 2339800000),
-('PN25', '2025-10-24 14 15:18:25', 'admin', 'ANPHAT', 22490000),
-('PN26', '2025-10-24 14 20:01:37', 'admin', 'ANPHAT', 50380000),
-('PN27', '2025-10-24 14 20:02:31', 'admin', 'ANPHAT', 192900000),
-('PN28', '2025-10-24 15 10:43:36', 'admin', 'ANPHAT', 71870000),
-('PN29', '2025-10-24 16 02:19:55', 'admin', 'CODO', 10690000),
-('PN3', '2025-10-24 03 03:58:18', 'admin', 'FPT', 88450000),
-('PN30', '2025-10-24 15 23:13:22', 'admin', 'ANPHAT', 59480000),
+('PN1', '2025-10-24 01:00:00', 'admin', 'FPT', 42980000),
+('PN10', '2025-10-24 07:00:00', 'admin', 'HOANGPHAT', 112440000),
+('PN11', '2025-10-24 07:00:00', 'admin', 'FPT', 98300000),
+('PN12', '2025-10-24 16:00:00', 'admin', 'HACOM', 39880000),
+('PN13', '2025-10-24 16:00:00', 'admin', 'PHONGVU', 38980000),
+('PN14', '2025-10-24 08:00:00', 'admin', 'FPT', 50970000),
+('PN15', '2025-10-24 08:00:00', 'admin', 'FPT', 39980000),
+('PN16', '2025-10-24 08:00:00', 'admin', 'HOANGPHAT', 52170000),
+('PN17', '2025-10-24 09:00:00', 'admin', 'FPT', 30180000),
+('PN18', '2025-10-24 09:00:00', 'admin', 'FPT', 78750000),
+('PN19', '2025-10-24 12:00:00', 'admin', 'PHONGVU', 66860000),
+('PN2', '2025-10-24 01:00:00', 'admin', 'FPT', 46780000),
+('PN20', '2025-10-24 00:19:46', 'admin', 'PHONGVU', 233270000),
+('PN21', '2025-10-24 14:00:00', 'admin', 'PHONGVU', 1536180000),
+('PN22', '2025-10-24 14:00:00', 'admin', 'FPT', 89660000),
+('PN23', '2025-10-24 14:00:00', 'admin', 'FPT', 112540000),
+('PN24', '2025-10-24 14:00:00', 'admin', 'FPT', 2339800000),
+('PN25', '2025-10-24 14:00:00', 'admin', 'ANPHAT', 22490000),
+('PN26', '2025-10-24 14:00:00', 'admin', 'ANPHAT', 50380000),
+('PN27', '2025-10-24 14:00:00', 'admin', 'ANPHAT', 192900000),
+('PN28', '2025-10-24 15:00:00', 'admin', 'ANPHAT', 71870000),
+('PN29', '2025-10-24 16:00:00', 'admin', 'CODO', 10690000),
+('PN3', '2025-10-24 03:00:00', 'admin', 'FPT', 88450000),
+('PN30', '2025-10-24 15:00:00', 'admin', 'ANPHAT', 59480000),
 ('PN31', '2025-10-24 08:13:10', 'admin', 'ANPHAT', 58370000),
-('PN32', '2025-10-24 16 02:19:27', 'admin', 'HOANGPHAT', 80260000),
+('PN32', '2025-10-24 16:00:00', 'admin', 'HOANGPHAT', 80260000),
 ('PN33', '2025-10-24 08:12:35', 'admin', 'VIETSTARS', 68070000),
-('PN34', '2025-10-24 16 15:31:14', 'admin', 'HOANGPHAT', 513500000),
-('PN35', '2025-10-24 16 15:36:48', 'admin', 'HOANGPHAT', 59760000),
-('PN36', '2025-10-24 16 15:40:31', 'admin', 'ANPHAT', 389800000),
-('PN37', '2025-10-24 04:01:02:09', 'admin', 'ANPHAT', 85350000),
+('PN34', '2025-10-24 16:00:00', 'admin', 'HOANGPHAT', 513500000),
+('PN35', '2025-10-24 16:00:00', 'admin', 'HOANGPHAT', 59760000),
+('PN36', '2025-10-24 16:00:00', 'admin', 'ANPHAT', 389800000),
+('PN37', '2025-10-24 04:01:02', 'admin', 'ANPHAT', 85350000),
 ('PN38', '2025-10-24 08:15:21', 'admin', 'ANPHAT', 838500000),
-('PN4', '2025-10-24 03 03:58:37', 'admin', 'TGDĐ', 53270000),
-('PN5', '2025-10-24 06 17:51:02', 'admin', 'FPT', 32070000),
-('PN6', '2025-10-24 06 18:50:32', 'admin', 'FPT', 38190000),
-('PN7', '2025-10-24 06 18:59:43', 'admin', 'PHONGVU', 135530000),
-('PN8', '2025-10-24 06 19:15:01', 'admin', 'FPT', 46670000),
-('PN9', '2025-10-24 06 19:20:44', 'admin', 'FPT', 43480000);
+('PN39', '2025-10-31 03:18:37', 'admin', 'ANPHAT', 51980000),
+('PN4', '2025-10-24 03:00:00', 'admin', 'TGDĐ', 53270000),
+('PN5', '2025-10-24 06:00:00', 'admin', 'FPT', 32070000),
+('PN6', '2025-10-24 06:00:00', 'admin', 'FPT', 38190000),
+('PN7', '2025-10-24 06:00:00', 'admin', 'PHONGVU', 135530000),
+('PN8', '2025-10-24 06:00:00', 'admin', 'FPT', 46670000),
+('PN9', '2025-10-24 06:00:00', 'admin', 'FPT', 43480000);
 
 -- --------------------------------------------------------
 
@@ -437,31 +441,79 @@ CREATE TABLE `phieuxuat` (
 --
 
 INSERT INTO `phieuxuat` (`maPhieu`, `thoiGianTao`, `nguoiTao`, `tongTien`) VALUES
-('PX1', '2025-10-24 01 14:10:44', 'admin', 291860000),
-('PX10', '2025-10-24 07 18:41:08', 'admin', 57160000),
-('PX12', '2025-10-24 07 19:06:56', 'admin', 45370000),
-('PX13', '2025-10-24 08 12:31:48', 'admin', 109420000),
-('PX14', '2025-10-24 08 16:30:10', 'admin', 78650000),
-('PX15', '2025-10-24 12 22:31:09', 'admin', 86850000),
-('PX16', '2025-10-24 14 15:04:47', 'admin', 136740000),
-('PX17', '2025-10-24 14 15:34:07', 'admin', 51980000),
-('PX18', '2025-10-24 15 20:32:57', 'admin', 151730000),
-('PX19', '2025-10-24 16 02:20:15', 'Admin', 59360000),
-('PX2', '2025-10-24 04 16:45:43', 'admin', 70660000),
-('PX20', '2025-10-24 16 13:26:33', 'Admin', 79140000),
-('PX21', '2025-10-24 16 13:36:43', 'Admin', 60850000),
-('PX22', '2025-10-24 16 16:39:41', 'Admin', 35780000),
-('PX23', '2025-10-24 16 17:18:54', 'Admin', 41460000),
-('PX24', '2025-10-24 16 17:25:10', 'Admin', 63360000),
-('PX25', '2025-10-24 16 18:51:31', 'Admin', 92550000),
+('PX1', '2025-10-24 01:00:00', 'admin', 291860000),
+('PX10', '2025-10-24 07:00:00', 'admin', 57160000),
+('PX12', '2025-10-24 07:00:00', 'admin', 45370000),
+('PX13', '2025-10-24 08:00:00', 'admin', 109420000),
+('PX14', '2025-10-24 08:00:00', 'admin', 78650000),
+('PX15', '2025-10-24 12:00:00', 'admin', 86850000),
+('PX16', '2025-10-24 14:00:00', 'admin', 136740000),
+('PX17', '2025-10-24 14:00:00', 'admin', 51980000),
+('PX18', '2025-10-24 15:00:00', 'admin', 151730000),
+('PX19', '2025-10-24 16:00:00', 'Admin', 59360000),
+('PX2', '2025-10-24 04:00:00', 'admin', 70660000),
+('PX20', '2025-10-24 16:00:00', 'Admin', 79140000),
+('PX21', '2025-10-24 16:00:00', 'Admin', 60850000),
+('PX22', '2025-10-24 16:00:00', 'Admin', 35780000),
+('PX23', '2025-10-24 16:00:00', 'Admin', 41460000),
+('PX24', '2025-10-24 16:00:00', 'Admin', 63360000),
+('PX25', '2025-10-24 16:00:00', 'Admin', 92550000),
 ('PX26', '2025-10-24 08:08:58', 'admin', 94760000),
-('PX3', '2025-10-24 04 16:45:52', 'admin', 89350000),
-('PX4', '2025-10-24 04 16:45:59', 'admin', 58170000),
-('PX5', '2025-10-24 06 19:10:13', 'admin', 85250000),
-('PX6', '2025-10-24 06 19:19:12', 'admin', 71460000),
-('PX7', '2025-10-24 06 19:25:43', 'admin', 52370000),
-('PX8', '2025-10-24 07 18:39:54', 'admin', 39880000),
-('PX9', '2025-10-24 07 18:40:22', 'admin', 36680000);
+('PX27', '2025-10-31 03:53:05', 'Admin', 715310000),
+('PX3', '2025-10-24 04:00:00', 'admin', 89350000),
+('PX4', '2025-10-24 04:00:00', 'admin', 58170000),
+('PX5', '2025-10-24 06:00:00', 'admin', 85250000),
+('PX6', '2025-10-24 06:00:00', 'admin', 71460000),
+('PX7', '2025-10-24 06:00:00', 'admin', 52370000),
+('PX8', '2025-10-24 07:00:00', 'admin', 39880000),
+('PX9', '2025-10-24 07:00:00', 'admin', 36680000);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `promotion`
+--
+
+CREATE TABLE `promotion` (
+  `tenkhuyenmai` varchar(255) NOT NULL,
+  `chitietkhuyenmai` varchar(255) NOT NULL,
+  `percent` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `promotion`
+--
+
+INSERT INTO `promotion` (`tenkhuyenmai`, `chitietkhuyenmai`, `percent`) VALUES
+('Back to School 2025', 'Giảm giá đặc biệt cho HSSV khi mua laptop Dell, HP, Asus.', 15),
+('Gaming Gear Sale', 'Giảm sốc tất cả laptop gaming và PC đồng bộ.', 20),
+('Black Friday Khủng', 'Giảm giá toàn bộ sản phẩm laptop và linh kiện máy tính.', 30),
+('Chào Hè Sôi Động', 'Giảm 10% cho các dòng laptop mỏng nhẹ, laptop văn phòng.', 10),
+('Tri Ân Khách Hàng', 'Giảm 5% cho khách hàng thành viên khi mua bất kỳ sản phẩm nào.', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `companyname` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `poin` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`companyname`, `address`, `phone_number`, `poin`) VALUES
+('Công ty ABC', '123 Đường A, Quận 1, TP. HCM', '0901234567', 100),
+('Tập đoàn XYZ', '456 Đường B, Quận Hoàn Kiếm, Hà Nội', '0912345678', 250),
+('Cửa hàng Tiện lợi Nhanh', '789 Đường C, Quận Hải Châu, Đà Nẵng', '0987654321', 50),
+('Cửa hàng mày tính Jeff Jr', '101 Đường D, Quận Ninh Kiều, Cần Thơ', '0939111222', 175),
+('FPT Store', '202 Đường E, Quận 3, TP. HCM', '0905555888', 80);
 
 --
 -- Chỉ mục cho các bảng đã đổ
