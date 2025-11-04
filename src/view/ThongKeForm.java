@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
+import java.util.Comparator;
 import controller.ConvertDate;
 import controller.SearchAccount;
 import dao.AccountDAO;
@@ -21,6 +22,7 @@ import dao.NhaCungCapDAO;
 import dao.PhieuNhapDAO;
 import dao.PhieuXuatDAO;
 import dao.ThongKeDAO;
+import dao.UserDAO;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +43,7 @@ import model.Account;
 import model.Phieu;
 import model.PhieuXuat;
 import model.ThongKeProduct;
+import model.User;
 
 /**
  *
@@ -85,6 +88,12 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
         // Khởi tạo biểu đồ tròn ở tab "Biểu đồ"
         initPieChartTab();
+
+        // Khởi tạo Top khách hàng
+        initTopCustomersTab();
+
+        // Khởi tạo Top nhân viên
+        initTopStaffTab();
     }
 
     public final void initTable() {
@@ -188,6 +197,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -236,6 +246,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAccount = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         txtQuantityProduct = new javax.swing.JLabel();
@@ -336,7 +347,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                         .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1162,
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1174,
                                                 Short.MAX_VALUE)
                                         .addGroup(jPanel15Layout.createSequentialGroup()
                                                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, 397,
@@ -570,7 +581,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
                                                                 .addComponent(jPanel3,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 764,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 776,
                                                                         Short.MAX_VALUE))
                                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addComponent(jPanel4,
@@ -731,12 +742,23 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
                 jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1180, Short.MAX_VALUE));
+                        .addGap(0, 1192, Short.MAX_VALUE));
         jPanel17Layout.setVerticalGroup(
                 jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 585, Short.MAX_VALUE));
+                        .addGap(0, 1228, Short.MAX_VALUE));
 
         jTabbedPane1.addTab("Biểu đồ", jPanel17);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+                jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1192, Short.MAX_VALUE));
+        jPanel14Layout.setVerticalGroup(
+                jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 1228, Short.MAX_VALUE));
+
+        jTabbedPane1.addTab("Top khách hàng", jPanel14);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, -1, 620));
 
@@ -1211,6 +1233,106 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         }
     }
 
+    private void initTopCustomersTab() {
+        try {
+            jPanel14.removeAll();
+            jPanel14.setLayout(new BorderLayout());
+
+            tblTopUsers = new javax.swing.JTable();
+            tblTopUsers.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][] {},
+                    new String[] { "Top", "Tên công ty", "Số điện thoại", "Địa chỉ", "Poin" }) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+            jScrollPaneTopUsers = new javax.swing.JScrollPane(tblTopUsers);
+            jPanel14.add(jScrollPaneTopUsers, BorderLayout.CENTER);
+
+            loadTopCustomers();
+            jPanel14.revalidate();
+            jPanel14.repaint();
+        } catch (Exception e) {
+        }
+    }
+
+    private void loadTopCustomers() {
+        try {
+            ArrayList<User> users = UserDAO.getInstance().selectAll();
+            users.sort(new Comparator<User>() {
+                @Override
+                public int compare(User o1, User o2) {
+                    int p1 = o1.getPoin() == null ? 0 : o1.getPoin();
+                    int p2 = o2.getPoin() == null ? 0 : o2.getPoin();
+                    return Integer.compare(p2, p1);
+                }
+            });
+
+            DefaultTableModel model = (DefaultTableModel) tblTopUsers.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < users.size(); i++) {
+                User u = users.get(i);
+                model.addRow(new Object[] {
+                        (i + 1),
+                        u.getCompanyName(),
+                        u.getPhoneNumber(),
+                        u.getAddress(),
+                        u.getPoin() == null ? 0 : u.getPoin()
+                });
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void initTopStaffTab() {
+        try {
+            jPanelTopStaff = new javax.swing.JPanel();
+            jPanelTopStaff.setLayout(new BorderLayout());
+            tblTopStaff = new javax.swing.JTable();
+            tblTopStaff.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][] {},
+                    new String[] { "Top", "Họ và tên", "Tên đăng nhập", "Email", "Vai trò", "Poin" }) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            });
+            jScrollPaneTopStaff = new javax.swing.JScrollPane(tblTopStaff);
+            jPanelTopStaff.add(jScrollPaneTopStaff, BorderLayout.CENTER);
+
+            loadTopStaff();
+            jTabbedPane1.addTab("Top nhân viên", jPanelTopStaff);
+        } catch (Exception e) {
+        }
+    }
+
+    private void loadTopStaff() {
+        try {
+            ArrayList<Account> accounts = AccountDAO.getInstance().selectAll();
+            accounts.sort(new Comparator<Account>() {
+                @Override
+                public int compare(Account o1, Account o2) {
+                    return Integer.compare(o2.getPoin(), o1.getPoin());
+                }
+            });
+            DefaultTableModel model = (DefaultTableModel) tblTopStaff.getModel();
+            model.setRowCount(0);
+            for (int i = 0; i < accounts.size(); i++) {
+                Account a = accounts.get(i);
+                model.addRow(new Object[] {
+                        (i + 1),
+                        a.getFullName(),
+                        a.getUser(),
+                        a.getEmail(),
+                        a.getRole(),
+                        a.getPoin()
+                });
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public Phieu getPhieuNhapSelect() {
         int i_row = tblPhieuNhap.getSelectedRow();
         Phieu pn = PhieuNhapDAO.getInstance().selectById(tblModel.getValueAt(i_row, 1).toString());
@@ -1436,9 +1558,15 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JTable tblTopUsers;
+    private javax.swing.JScrollPane jScrollPaneTopUsers;
+    private javax.swing.JPanel jPanelTopStaff;
+    private javax.swing.JTable tblTopStaff;
+    private javax.swing.JScrollPane jScrollPaneTopStaff;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
