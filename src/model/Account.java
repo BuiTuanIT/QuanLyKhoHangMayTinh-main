@@ -14,12 +14,13 @@ public class Account {
     private String role;
     private int status;
     private String email;
+    private int poin;
 
     public Account() {
         super();
     }
 
-    public Account(String fullName, String user, String password, String role, int status, String email) {
+    public Account(String fullName, String user, String password, String role, int status, String email, int poin) {
         super();
         this.fullName = fullName;
         this.user = user;
@@ -27,6 +28,7 @@ public class Account {
         this.role = role;
         this.status = status;
         this.email = email;
+        this.poin = poin;
     }
 
     public int getStatus() {
@@ -77,6 +79,14 @@ public class Account {
         this.email = email;
     }
 
+    public int getPoin() {
+        return poin;
+    }
+
+    public void setPoin(int poin) {
+        this.poin = poin;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -86,6 +96,7 @@ public class Account {
         hash = 47 * hash + Objects.hashCode(this.role);
         hash = 47 * hash + this.status;
         hash = 47 * hash + Objects.hashCode(this.email);
+        hash = 47 * hash + this.poin;
         return hash;
     }
 
@@ -116,13 +127,16 @@ public class Account {
         if (!Objects.equals(this.role, other.role)) {
             return false;
         }
-        return Objects.equals(this.email, other.email);
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return this.poin == other.poin;
     }
 
     @Override
     public String toString() {
-        return "Account{" + "fullName=" + fullName + ", user=" + user + ", password=" + password + ", role=" + role + ", status=" + status + ", email=" + email + '}';
+        return "Account{" + "fullName=" + fullName + ", user=" + user + ", password=" + password + ", role=" + role
+                + ", status=" + status + ", email=" + email + ", poin=" + poin + '}';
     }
-
 
 }
