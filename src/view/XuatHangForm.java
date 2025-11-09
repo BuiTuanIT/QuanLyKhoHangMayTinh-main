@@ -67,7 +67,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
 
     public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"Mã máy", "Tên máy", "Số lượng", "Đơn giá"};
+        String[] headerTbl = new String[]{"Mã máy", "Tên máy", "Bảo hành", "Số lượng", "Đơn giá"};
         tblModel.setColumnIdentifiers(headerTbl);
         tblSanPham.setModel(tblModel);
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(5);
@@ -83,7 +83,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
             tblModel.setRowCount(0);
             for (var i : arrProd) {
                 tblModel.addRow(new Object[]{
-                    i.getMaMay(), i.getTenMay(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                    i.getMaMay(), i.getTenMay(), i.getBaoHanh(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
                 });
             }
         } catch (Exception e) {

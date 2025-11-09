@@ -54,6 +54,7 @@ public class CTPhieuXuat extends javax.swing.JDialog {
                     i + 1, 
                     CTPhieu.get(i).getMaMay(),
                     MayTinhDAO.getInstance().selectById(CTPhieu.get(i).getMaMay()).getTenMay(),
+                    MayTinhDAO.getInstance().selectById(CTPhieu.get(i).getMaMay()).getBaoHanh(),
                     CTPhieu.get(i).getSoLuong(),
                     parent.getFormatter().format(CTPhieu.get(i).getDonGia()) + "đ",
                     parent.getFormatter().format(CTPhieu.get(i).getDonGia() * CTPhieu.get(i).getSoLuong()) + "đ"
@@ -119,13 +120,13 @@ public class CTPhieuXuat extends javax.swing.JDialog {
 
         tblChiTietPhieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã máy", "Tên máy", "Số lượng", "Đơn giá", "Thành tiền"
+                "STT", "Mã máy", "Tên máy", "Bảo hành", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
         jScrollPane1.setViewportView(tblChiTietPhieu);

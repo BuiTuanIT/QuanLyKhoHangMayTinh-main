@@ -17,6 +17,7 @@ public class MayTinh {
     private String cardManHinh;
     private String Rom;
     private int trangThai;
+    private String baoHanh;
     
 
     public MayTinh() {
@@ -38,6 +39,21 @@ public class MayTinh {
         this.cardManHinh = cardManHinh;
         this.Rom = Rom;
         this.trangThai = trangThai;
+        this.baoHanh = "";
+    }
+
+    public MayTinh(String maMay, String tenMay, int soLuong, double gia, String tenCpu, String ram, String xuatXu, String cardManHinh, String Rom, int trangThai, String baoHanh) {
+        this.maMay = maMay;
+        this.tenMay = tenMay;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.tenCpu = tenCpu;
+        this.ram = ram;
+        this.xuatXu = xuatXu;
+        this.cardManHinh = cardManHinh;
+        this.Rom = Rom;
+        this.trangThai = trangThai;
+        this.baoHanh = baoHanh;
     }
 
     public int getTrangThai() {
@@ -128,6 +144,14 @@ public class MayTinh {
 
     public void setRom(String Rom) {
         this.Rom = Rom;
+    }
+
+    public String getBaoHanh() {
+        return baoHanh;
+    }
+
+    public void setBaoHanh(String baoHanh) {
+        this.baoHanh = baoHanh;
     }
 
     public void xuatHang(int sl) {

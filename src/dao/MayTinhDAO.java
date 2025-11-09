@@ -33,7 +33,7 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
         int ketqua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE MayTinh SET tenMay = ?,soLuong=?,gia=?,tenCpu=?,ram=?,xuatXu=?,cardManHinh=?,rom=?,trangThai=? WHERE maMay=?";
+            String sql = "UPDATE MayTinh SET tenMay = ?,soLuong=?,gia=?,tenCpu=?,ram=?,xuatXu=?,cardManHinh=?,rom=?,trangThai=?,baoHanh=? WHERE maMay=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getTenMay());
             pst.setInt(2, t.getSoLuong());
@@ -44,7 +44,8 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
             pst.setString(7, t.getCardManHinh());
             pst.setString(8, t.getRom());
             pst.setInt(9, t.getTrangThai());
-            pst.setString(10, t.getMaMay());
+            pst.setString(10, t.getBaoHanh());
+            pst.setString(11, t.getMaMay());
             ketqua = pst.executeUpdate(sql);
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -76,7 +77,7 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
         ArrayList<MayTinh> ketQua = new ArrayList<MayTinh>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh";
+            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai,baoHanh FROM MayTinh";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -90,7 +91,8 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
                 String cardManHinh = rs.getString("cardManHinh");
                 String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
                 ketQua.add(mt);
             }
             JDBCUtil.closeConnection(con);
@@ -107,7 +109,7 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
         MayTinh ketQua = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh WHERE maMay = ?";
+            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai,baoHanh FROM MayTinh WHERE maMay = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
 
@@ -123,7 +125,8 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
                 String cardManHinh = rs.getString("cardManHinh");
                 String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                ketQua = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                ketQua = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
             }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -171,7 +174,7 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
         ArrayList<MayTinh> ketQuaTonKho = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh";
+            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai,baoHanh FROM MayTinh";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -185,7 +188,8 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
                 String cardManHinh = rs.getString("cardManHinh");
                 String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
                 ketQua.add(mt);
             }
             for (MayTinh mayTinh : ketQua) {
@@ -205,7 +209,7 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
         ArrayList<MayTinh> ketQua = new ArrayList<MayTinh>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh WHERE trangThai = 1";
+            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai,baoHanh FROM MayTinh WHERE trangThai = 1";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -219,7 +223,8 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
                 String cardManHinh = rs.getString("cardManHinh");
                 String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
                 ketQua.add(mt);
             }
             JDBCUtil.closeConnection(con);

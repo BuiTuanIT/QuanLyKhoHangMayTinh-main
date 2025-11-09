@@ -20,6 +20,12 @@ public class Laptop extends MayTinh{
         this.dungLuongPin = dungLuongPin;
     }
 
+    public Laptop(double kichThuocMan, String dungLuongPin, String maMay, String tenMay, int soLuong, double gia, String tenCpu, String ram, String xuatXu, String cardManHinh, String Rom, int trangThai, String baoHanh) {
+        super(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, Rom, trangThai, baoHanh);
+        this.kichThuocMan = kichThuocMan;
+        this.dungLuongPin = dungLuongPin;
+    }
+
     public Laptop() {
         
     }

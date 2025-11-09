@@ -178,7 +178,7 @@
                       <Component id="btnAddProduct" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnCancel" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -323,10 +323,12 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel12" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="jLabel16" alignment="0" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="98" max="32767" attributes="0"/>
                       </Group>
                       <Component id="txtDungLuongPin" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtBaoHanh" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -339,6 +341,11 @@
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="txtDungLuongPin" min="-2" pref="32" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="txtBaoHanh" min="-2" pref="32" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -357,6 +364,13 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtDungLuongPin">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtBaoHanh">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel16">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="B&#x1ea3;o h&#xe0;nh"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

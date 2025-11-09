@@ -27,7 +27,7 @@ public class PCDAO implements DAOInterface<PC> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, mainBoard, congSuatNguon, xuatXu, loaiMay, rom, trangThai) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, mainBoard, congSuatNguon, xuatXu, loaiMay, rom, trangThai, baoHanh) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaMay());
             pst.setString(2, t.getTenMay());
@@ -42,6 +42,7 @@ public class PCDAO implements DAOInterface<PC> {
             pst.setString(11, "PC - Lắp ráp");
             pst.setString(12, t.getRom());
             pst.setInt(13, t.getTrangThai());
+            pst.setString(14, t.getBaoHanh());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -56,7 +57,7 @@ public class PCDAO implements DAOInterface<PC> {
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE MayTinh SET maMay=?, tenMay=?, soLuong=?, tenCpu=?, ram=?, cardManHinh=?, gia=?, mainBoard=?, congSuatNguon=?, xuatXu=?, loaiMay = ?, rom = ?, trangThai = ? WHERE maMay= ? ";
+            String sql = "UPDATE MayTinh SET maMay=?, tenMay=?, soLuong=?, tenCpu=?, ram=?, cardManHinh=?, gia=?, mainBoard=?, congSuatNguon=?, xuatXu=?, loaiMay = ?, rom = ?, trangThai = ?, baoHanh = ? WHERE maMay= ? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaMay()); 
             pst.setString(2, t.getTenMay());
@@ -71,7 +72,8 @@ public class PCDAO implements DAOInterface<PC> {
             pst.setString(11, "PC - Lắp ráp");
             pst.setString(12, t.getRom());
             pst.setInt(13, t.getTrangThai());
-            pst.setString(14, t.getMaMay());
+            pst.setString(14, t.getBaoHanh());
+            pst.setString(15, t.getMaMay());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -118,7 +120,8 @@ public class PCDAO implements DAOInterface<PC> {
                 String rom = rs.getString("rom");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
-                PC mt = new PC(mainBoard, congSuatNguon, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom,trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                PC mt = new PC(mainBoard, congSuatNguon, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom,trangThai, baoHanh);
                 ketQua.add(mt);
             }
         } catch (Exception e) {
@@ -150,8 +153,9 @@ public class PCDAO implements DAOInterface<PC> {
                 String rom = rs.getString("rom");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
+                String baoHanh = rs.getString("baoHanh");
                 //Laptop(String kichThuocMan, String dungLuongPin, String maMay, String tenMay, int soLuong, double gia, String tenCpu, String ram, String xuatXu, String cardManHinh, String Rom)
-                ketQua = new PC(mainBoard, congSuatNguon, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom,trangThai);
+                ketQua = new PC(mainBoard, congSuatNguon, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom,trangThai, baoHanh);
             }
         } catch (Exception e) {
             // TODO: handle exception

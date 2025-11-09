@@ -40,6 +40,7 @@ public class UpdateProduct extends javax.swing.JDialog {
             txtROM.setText(a.getRom());
             txtGPU.setText(a.getCardManHinh());
             txtXuatXu.setText(a.getXuatXu());
+            txtBaoHanh.setText(a.getBaoHanh());
             cbxloaisp.setSelectedIndex(0);
             txtKichThuocMan.setText(Double.toString(a.getkichThuocMan()));
             txtDungLuongPin.setText(a.getDungLuongPin());
@@ -54,6 +55,7 @@ public class UpdateProduct extends javax.swing.JDialog {
             txtROM.setText(a.getRom());
             txtGPU.setText(a.getCardManHinh());
             txtXuatXu.setText(a.getXuatXu());
+            txtBaoHanh.setText(a.getBaoHanh());
             cbxloaisp.setSelectedIndex(1);
             txtMainBoard.setText(a.getMainBoard());
             txtCongsuatNguon.setText(Integer.toString(a.getCongSuatNguon()));
@@ -108,6 +110,8 @@ public class UpdateProduct extends javax.swing.JDialog {
         txtXuatXu = new javax.swing.JTextField();
         txtSoLuong = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        txtBaoHanh = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -284,6 +288,11 @@ public class UpdateProduct extends javax.swing.JDialog {
         jLabel16.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
         jLabel16.setText("Đơn giá");
 
+        txtBaoHanh.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
+
+        jLabel17.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
+        jLabel17.setText("Bảo hành");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -299,8 +308,10 @@ public class UpdateProduct extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtDonGia, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                .addComponent(txtSoLuong))
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtSoLuong)
+                                .addComponent(txtBaoHanh, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(91, 91, 91)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGPU, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,14 +401,18 @@ public class UpdateProduct extends javax.swing.JDialog {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtGPU, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29))))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 400));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 450));
 
         jPanel2.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
 
@@ -465,6 +480,22 @@ public class UpdateProduct extends javax.swing.JDialog {
         String rom = txtROM.getText();
         String gpu = txtGPU.getText();
         String xuatxu = txtXuatXu.getText();
+        String baohanh = txtBaoHanh.getText();
+        int baoHanhThang = 0;
+        try {
+            if (baohanh.contains(".") || baohanh.contains(",")) {
+                JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+                return;
+            }
+            baoHanhThang = Integer.parseInt(baohanh);
+            if (baoHanhThang <= 0) {
+                JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+            return;
+        }
         if (cbxloaisp.getSelectedItem().equals("Laptop")) {
             double kichthuocman = 0;
             try {
@@ -476,7 +507,7 @@ public class UpdateProduct extends javax.swing.JDialog {
             if (maMay.equals("") || tenMay.equals("") || cpu.equals("") || ram.equals("") || rom.equals("") || gpu.equals("") || xuatxu.equals("") || dungluongpin.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1);
+                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1,baohanh);
                 try {
                     LaptopDAO.getInstance().update(lp);
                     this.dispose();
@@ -498,7 +529,7 @@ public class UpdateProduct extends javax.swing.JDialog {
             if (maMay.equals("") || tenMay.equals("") || cpu.equals("") || ram.equals("") || rom.equals("") || gpu.equals("") || xuatxu.equals("") || mainboard.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1);
+                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1,baohanh);
                 System.out.println(pc);
                 PCDAO.getInstance().update(pc);
                 this.dispose();
@@ -574,6 +605,7 @@ public class UpdateProduct extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -586,6 +618,7 @@ public class UpdateProduct extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel laptop;
     private javax.swing.JPanel pc;
+    private javax.swing.JTextField txtBaoHanh;
     private javax.swing.JTextField txtCPU;
     private javax.swing.JTextField txtCongsuatNguon;
     private javax.swing.JTextField txtDonGia;

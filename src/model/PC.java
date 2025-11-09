@@ -25,6 +25,12 @@ public class PC extends MayTinh{
         this.congSuatNguon = congSuatNguon;
     }
 
+    public PC(String mainBoard, int congSuatNguon, String maMay, String tenMay, int soLuong, double gia, String tenCpu, String ram, String xuatXu, String cardManHinh, String Rom, int trangThai, String baoHanh) {
+        super(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, Rom, trangThai, baoHanh);
+        this.mainBoard = mainBoard;
+        this.congSuatNguon = congSuatNguon;
+    }
+
     public PC() {
         
     }

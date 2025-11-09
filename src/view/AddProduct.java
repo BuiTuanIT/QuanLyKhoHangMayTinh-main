@@ -72,6 +72,8 @@ public class AddProduct extends javax.swing.JDialog {
         txtKichThuocMan = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtDungLuongPin = new javax.swing.JTextField();
+        txtBaoHanh = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         pc = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtMainBoard = new javax.swing.JTextField();
@@ -153,6 +155,8 @@ public class AddProduct extends javax.swing.JDialog {
 
         jLabel12.setText("Dung lượng PIN");
 
+        jLabel16.setText("Bảo hành");
+
         javax.swing.GroupLayout laptopLayout = new javax.swing.GroupLayout(laptop);
         laptop.setLayout(laptopLayout);
         laptopLayout.setHorizontalGroup(
@@ -161,9 +165,11 @@ public class AddProduct extends javax.swing.JDialog {
             .addGroup(laptopLayout.createSequentialGroup()
                 .addGroup(laptopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 98, Short.MAX_VALUE))
             .addComponent(txtDungLuongPin)
+            .addComponent(txtBaoHanh)
         );
         laptopLayout.setVerticalGroup(
             laptopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +180,12 @@ public class AddProduct extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtDungLuongPin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtDungLuongPin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtBaoHanh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel3.add(laptop, "card2");
@@ -327,7 +338,7 @@ public class AddProduct extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 880, 400));
@@ -395,6 +406,22 @@ public class AddProduct extends javax.swing.JDialog {
         String rom = txtROM.getText();
         String gpu = txtGPU.getText();
         String xuatxu = txtXuatXu.getText();
+        String baohanh = txtBaoHanh.getText();
+        int baoHanhThang = 0;
+        try {
+            if (baohanh.contains(".") || baohanh.contains(",")) {
+                JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+                return;
+            }
+            baoHanhThang = Integer.parseInt(baohanh);
+            if (baoHanhThang <= 0) {
+                JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thời gian bảo hành là số nguyên dương !");
+            return;
+        }
         int trangThai = 1;
         if (cbxloaisp.getSelectedItem().equals("Laptop")) {
             try {
@@ -406,7 +433,7 @@ public class AddProduct extends javax.swing.JDialog {
             if (maMay.equals("") && tenMay.equals("") && cpu.equals("") && ram.equals("") && rom.equals("") && gpu.equals("") && xuatxu.equals("") && dungluongpin.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai);
+                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai,baohanh);
                 try {
                     LaptopDAO.getInstance().insert(lp);
                     this.dispose();
@@ -428,7 +455,7 @@ public class AddProduct extends javax.swing.JDialog {
             if (maMay.equals("") && tenMay.equals("") && cpu.equals("") && ram.equals("") && rom.equals("") && gpu.equals("") && xuatxu.equals("") && mainboard.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai);
+                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai,baohanh);
                 PCDAO.getInstance().insert(pc);
                 this.dispose();
                 JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công !");
@@ -557,6 +584,7 @@ public class AddProduct extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -569,6 +597,7 @@ public class AddProduct extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel laptop;
     private javax.swing.JPanel pc;
+    private javax.swing.JTextField txtBaoHanh;
     private javax.swing.JTextField txtCPU;
     private javax.swing.JTextField txtCongsuatNguon;
     private javax.swing.JTextField txtDonGia;

@@ -17,12 +17,12 @@ public class JDBCUtil {
 			//Cac thong so
 			String url = "jdbc:mySQL://localhost:3306/quanlimaytinh";
 			String userName = "root";
-			String password = "";
+			String password = "khongrotmon";
 			//Tao ket noi 
 			c = DriverManager.getConnection(url, userName, password);
 		} catch (Exception e) {
 			// TODO: handle exception
-//			JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !","Lỗi", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu !","Lỗi", JOptionPane.ERROR_MESSAGE);
 		}
 		return c;
 	}

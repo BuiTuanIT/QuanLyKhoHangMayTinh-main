@@ -28,7 +28,7 @@ public class LaptopDAO implements DAOInterface<Laptop> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, kichThuocMan, xuatXu, loaiMay, rom, trangThai) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, kichThuocMan, xuatXu, loaiMay, rom, trangThai, baoHanh) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaMay());
             pst.setString(2, t.getTenMay());
@@ -43,6 +43,7 @@ public class LaptopDAO implements DAOInterface<Laptop> {
             pst.setString(11, "Laptop");
             pst.setString(12, t.getRom());
             pst.setInt(13, t.getTrangThai());
+            pst.setString(14, t.getBaoHanh());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -57,7 +58,7 @@ public class LaptopDAO implements DAOInterface<Laptop> {
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE MayTinh SET maMay=?, tenMay=?, soLuong=?, tenCpu=?, ram=?, cardManHinh=?, gia=?, dungLuongPin=?, kichThuocMan=?, xuatXu=?, loaiMay = ?, rom = ?, trangThai = ? WHERE maMay=? ";
+            String sql = "UPDATE MayTinh SET maMay=?, tenMay=?, soLuong=?, tenCpu=?, ram=?, cardManHinh=?, gia=?, dungLuongPin=?, kichThuocMan=?, xuatXu=?, loaiMay = ?, rom = ?, trangThai = ?, baoHanh = ? WHERE maMay=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaMay());
             pst.setString(2, t.getTenMay());
@@ -72,7 +73,8 @@ public class LaptopDAO implements DAOInterface<Laptop> {
             pst.setString(11, "Laptop");
             pst.setString(12, t.getRom());
             pst.setInt(13, t.getTrangThai());
-            pst.setString(14, t.getMaMay());
+            pst.setString(14, t.getBaoHanh());
+            pst.setString(15, t.getMaMay());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -119,7 +121,8 @@ public class LaptopDAO implements DAOInterface<Laptop> {
                 String rom = rs.getString("rom");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
-                Laptop mt = new Laptop(kichThuocMan, dungLuongPin, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                String baoHanh = rs.getString("baoHanh");
+                Laptop mt = new Laptop(kichThuocMan, dungLuongPin, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
                 ketQua.add(mt);
             }
             JDBCUtil.closeConnection(con);
@@ -152,8 +155,9 @@ public class LaptopDAO implements DAOInterface<Laptop> {
                 String rom = rs.getString("rom");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
+                String baoHanh = rs.getString("baoHanh");
                 //Laptop(String kichThuocMan, String dungLuongPin, String maMay, String tenMay, int soLuong, double gia, String tenCpu, String ram, String xuatXu, String cardManHinh, String Rom)
-                ketQua = new Laptop(kichThuocMan, dungLuongPin, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                ketQua = new Laptop(kichThuocMan, dungLuongPin, maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai, baoHanh);
             }
             JDBCUtil.closeConnection(con);
 
