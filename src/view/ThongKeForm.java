@@ -22,7 +22,7 @@ import dao.NhaCungCapDAO;
 import dao.PhieuNhapDAO;
 import dao.PhieuXuatDAO;
 import dao.ThongKeDAO;
-import dao.UserDAO;
+import dao.KhachHangDAO;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +43,7 @@ import model.Account;
 import model.Phieu;
 import model.PhieuXuat;
 import model.ThongKeProduct;
-import model.User;
+import model.KhachHang;
 
 /**
  *
@@ -1259,26 +1259,24 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
     private void loadTopCustomers() {
         try {
-            ArrayList<User> users = UserDAO.getInstance().selectAll();
-            users.sort(new Comparator<User>() {
+            ArrayList<KhachHang> users = KhachHangDAO.getInstance().selectAll();
+            users.sort(new Comparator<KhachHang>() {
                 @Override
-                public int compare(User o1, User o2) {
-                    int p1 = o1.getPoin() == null ? 0 : o1.getPoin();
-                    int p2 = o2.getPoin() == null ? 0 : o2.getPoin();
-                    return Integer.compare(p2, p1);
+                public int compare(KhachHang o1, KhachHang o2) {
+                    return Integer.compare(o2.getPoin(), o1.getPoin());
                 }
             });
 
             DefaultTableModel model = (DefaultTableModel) tblTopUsers.getModel();
             model.setRowCount(0);
             for (int i = 0; i < users.size(); i++) {
-                User u = users.get(i);
+                KhachHang u = users.get(i);
                 model.addRow(new Object[] {
                         (i + 1),
                         u.getCompanyName(),
                         u.getPhoneNumber(),
                         u.getAddress(),
-                        u.getPoin() == null ? 0 : u.getPoin()
+                        u.getPoin()
                 });
             }
         } catch (Exception e) {

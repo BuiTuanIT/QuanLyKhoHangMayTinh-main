@@ -34,6 +34,8 @@ public class CTPhieuXuat extends javax.swing.JDialog {
         labelNguoiTao.setText(AccountDAO.getInstance().selectById(pn.getNguoiTao()).getFullName());
         labelTongTien.setText(this.parent.getFormatter().format(pn.getTongTien()) + "đ");
         labelThoiGianTao.setText(this.parent.getFormatDate().format(pn.getThoiGianTao()));
+        String companyName = pn.getCompanyName() != null ? pn.getCompanyName() : "—";
+        labelKhachHang.setText(companyName);
         loadDataToTableProduct();
         setWidthTable();
     }
@@ -85,6 +87,8 @@ public class CTPhieuXuat extends javax.swing.JDialog {
         labelMaPhieu = new javax.swing.JLabel();
         labelNguoiTao = new javax.swing.JLabel();
         labelThoiGianTao = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        labelKhachHang = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -144,6 +148,10 @@ public class CTPhieuXuat extends javax.swing.JDialog {
 
         labelThoiGianTao.setText("jLabel7");
 
+        jLabel6.setText("Khách hàng:");
+
+        labelKhachHang.setText("—");
+
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         jLabel7.setText("TỔNG TIỀN:");
 
@@ -167,11 +175,13 @@ public class CTPhieuXuat extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelNguoiTao, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelMaPhieu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -196,6 +206,10 @@ public class CTPhieuXuat extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(labelMaPhieu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(labelKhachHang))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -270,12 +284,14 @@ public class CTPhieuXuat extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelMaPhieu;
     private javax.swing.JLabel labelNguoiTao;
     private javax.swing.JLabel labelThoiGianTao;
+    private javax.swing.JLabel labelKhachHang;
     private javax.swing.JLabel labelTongTien;
     private javax.swing.JTable tblChiTietPhieu;
     // End of variables declaration//GEN-END:variables

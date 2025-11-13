@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2025 lúc 06:31 AM
+-- Thời gian đã tạo: Th10 13, 2025 lúc 08:38 AM
 -- Phiên bản máy phục vụ: 11.4.5-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -33,18 +33,19 @@ CREATE TABLE `account` (
   `password` varchar(60) DEFAULT NULL,
   `role` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
+  `email` varchar(50) DEFAULT NULL,
+  `poin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `account`
 --
 
-INSERT INTO `account` (`fullName`, `userName`, `password`, `role`, `status`, `email`) VALUES
-('Admin', 'admin', '$2a$12$Y87zSnx.tpFvieylSeXuo.agjb7swi3UVnoo6KVMY9xP5STj4zJhm', 'Admin', 1, 'hehehe@gmail.com'),
-('beta', 'beta', '$2a$12$89As1J0AB0yrqGjnQUHtpevc6voGyvzAd8OvzkS1vGDo3YPO2P.Ia', 'Nhân viên nhập', 1, 'j97_entertaiment@gmail.com'),
-('Bùi công tuấn', 'reddogqng', '$2a$12$jFg3OGhZ6WskJ41AKjevnOuPNOV/75eyNbNtav3iBFU40Hx6.Imi6', 'Nhân viên xuất', 1, 'reddogqng@gmail.com'),
-('j97', 'thienan', '$2a$12$l.g3yNPdPlSI2gYzIjcNUO4heFkkBDxfOdEyV3NcUSSIZoV9Ynz.K', 'Quản lý kho', 1, 'congtuanvlogs@gmail.com');
+INSERT INTO `account` (`fullName`, `userName`, `password`, `role`, `status`, `email`, `poin`) VALUES
+('Admin', 'admin', '$2a$12$Y87zSnx.tpFvieylSeXuo.agjb7swi3UVnoo6KVMY9xP5STj4zJhm', 'Admin', 1, 'hehehe@gmail.com', 27),
+('beta', 'beta', '$2a$12$89As1J0AB0yrqGjnQUHtpevc6voGyvzAd8OvzkS1vGDo3YPO2P.Ia', 'Nhân viên nhập', 1, 'j97_entertaiment@gmail.com', 0),
+('Bùi công tuấn', 'reddogqng', '$2a$12$jFg3OGhZ6WskJ41AKjevnOuPNOV/75eyNbNtav3iBFU40Hx6.Imi6', 'Nhân viên xuất', 1, 'reddogqng@gmail.com', 0),
+('j97', 'thienan', '$2a$12$l.g3yNPdPlSI2gYzIjcNUO4heFkkBDxfOdEyV3NcUSSIZoV9Ynz.K', 'Quản lý kho', 1, 'congtuanvlogs@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -176,106 +177,107 @@ CREATE TABLE `chitietphieuxuat` (
   `maPhieu` varchar(50) NOT NULL,
   `maMay` varchar(50) NOT NULL,
   `soLuong` int(11) DEFAULT NULL,
-  `donGia` double DEFAULT NULL
+  `donGia` double DEFAULT NULL,
+  `companyname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `chitietphieuxuat`
 --
 
-INSERT INTO `chitietphieuxuat` (`maPhieu`, `maMay`, `soLuong`, `donGia`) VALUES
-('PX1', 'LP10', 1, 23490000),
-('PX1', 'LP19', 13, 19490000),
-('PX1', 'LP3', 1, 15000000),
-('PX10', 'LP20', 1, 20790000),
-('PX10', 'LP4', 1, 10690000),
-('PX10', 'LP8', 1, 18390000),
-('PX10', 'PC06', 1, 9690000),
-('PX10', 'PC2', 1, 8290000),
-('PX12', 'LP20', 1, 20790000),
-('PX12', 'LP6', 1, 17490000),
-('PX12', 'PC1', 1, 7090000),
-('PX13', 'LP18', 1, 24990000),
-('PX13', 'LP5', 2, 19290000),
-('PX13', 'LP6', 1, 17490000),
-('PX13', 'PC1', 4, 7090000),
-('PX14', 'LP20', 1, 20790000),
-('PX14', 'LP24', 1, 21490000),
-('PX14', 'LP8', 1, 18390000),
-('PX14', 'PC06', 1, 9690000),
-('PX14', 'PC2', 1, 8290000),
-('PX15', 'LP17', 1, 23190000),
-('PX15', 'LP20', 1, 20790000),
-('PX15', 'LP5', 1, 19290000),
-('PX15', 'LP9', 1, 16490000),
-('PX15', 'PC1', 1, 7090000),
-('PX16', 'LP14', 4, 22490000),
-('PX16', 'LP20', 1, 20790000),
-('PX16', 'LP21', 1, 25990000),
-('PX17', 'LP21', 2, 25990000),
-('PX18', 'LP16', 5, 22990000),
-('PX18', 'LP8', 2, 18390000),
-('PX19', 'LP18', 1, 24990000),
-('PX19', 'LP23', 1, 15690000),
-('PX19', 'PC06', 1, 9690000),
-('PX19', 'PC3', 1, 8990000),
-('PX2', 'LP21', 1, 25990000),
-('PX2', 'LP6', 2, 17490000),
-('PX2', 'PC06', 1, 9690000),
-('PX20', 'LP6', 2, 17490000),
-('PX20', 'LP9', 1, 16490000),
-('PX20', 'PC06', 1, 9690000),
-('PX20', 'PC3', 2, 8990000),
-('PX21', 'LP23', 1, 15690000),
-('PX21', 'LP7', 1, 17490000),
-('PX21', 'PC06', 2, 9690000),
-('PX21', 'PC2', 1, 8290000),
-('PX22', 'LP5', 1, 19290000),
-('PX22', 'LP9', 1, 16490000),
-('PX23', 'LP23', 1, 15690000),
-('PX23', 'PC06', 1, 9690000),
-('PX23', 'PC1', 1, 7090000),
-('PX23', 'PC3', 1, 8990000),
-('PX24', 'LP19', 1, 19490000),
-('PX24', 'LP8', 1, 18390000),
-('PX24', 'LP9', 1, 16490000),
-('PX24', 'PC3', 1, 8990000),
-('PX25', 'LP19', 1, 19490000),
-('PX25', 'LP7', 2, 17490000),
-('PX25', 'PC1', 1, 7090000),
-('PX26', 'LP19', 1, 19490000),
-('PX26', 'LP22', 1, 23490000),
-('PX26', 'LP3', 1, 15000000),
-('PX26', 'LP5', 1, 19290000),
-('PX26', 'LP6', 1, 17490000),
-('PX27', 'LP13', 1, 9990000),
-('PX27', 'LP15', 28, 25190000),
-('PX3', 'LP22', 1, 23490000),
-('PX3', 'LP4', 1, 10690000),
-('PX3', 'LP8', 1, 18390000),
-('PX4', 'LP17', 1, 23190000),
-('PX4', 'LP6', 1, 17490000),
-('PX4', 'LP7', 1, 17490000),
-('PX5', 'LP16', 1, 22990000),
-('PX5', 'LP5', 1, 19290000),
-('PX5', 'LP7', 1, 17490000),
-('PX5', 'LP9', 1, 16490000),
-('PX5', 'PC3', 1, 8990000),
-('PX6', 'LP12', 1, 13090000),
-('PX6', 'LP13', 1, 9990000),
-('PX6', 'LP15', 1, 25190000),
-('PX6', 'LP17', 1, 23190000),
-('PX7', 'LP21', 1, 25990000),
-('PX7', 'LP5', 1, 19290000),
-('PX7', 'PC1', 1, 7090000),
-('PX8', 'LP24', 1, 21490000),
-('PX8', 'LP3', 1, 15000000),
-('PX8', 'LP5', 1, 19290000),
-('PX8', 'LP8', 1, 18390000),
-('PX8', 'PC1', 1, 7090000),
-('PX9', 'LP21', 1, 25990000),
-('PX9', 'LP22', 1, 23490000),
-('PX9', 'LP4', 1, 10690000);
+INSERT INTO `chitietphieuxuat` (`maPhieu`, `maMay`, `soLuong`, `donGia`, `companyname`) VALUES
+('PX1', 'LP10', 1, 23490000, ''),
+('PX1', 'LP19', 13, 19490000, ''),
+('PX1', 'LP3', 1, 15000000, ''),
+('PX10', 'LP20', 1, 20790000, ''),
+('PX10', 'LP4', 1, 10690000, ''),
+('PX10', 'LP8', 1, 18390000, ''),
+('PX10', 'PC06', 1, 9690000, ''),
+('PX10', 'PC2', 1, 8290000, ''),
+('PX12', 'LP20', 1, 20790000, ''),
+('PX12', 'LP6', 1, 17490000, ''),
+('PX12', 'PC1', 1, 7090000, ''),
+('PX13', 'LP18', 1, 24990000, ''),
+('PX13', 'LP5', 2, 19290000, ''),
+('PX13', 'LP6', 1, 17490000, ''),
+('PX13', 'PC1', 4, 7090000, ''),
+('PX14', 'LP20', 1, 20790000, ''),
+('PX14', 'LP24', 1, 21490000, ''),
+('PX14', 'LP8', 1, 18390000, ''),
+('PX14', 'PC06', 1, 9690000, ''),
+('PX14', 'PC2', 1, 8290000, ''),
+('PX15', 'LP17', 1, 23190000, ''),
+('PX15', 'LP20', 1, 20790000, ''),
+('PX15', 'LP5', 1, 19290000, ''),
+('PX15', 'LP9', 1, 16490000, ''),
+('PX15', 'PC1', 1, 7090000, ''),
+('PX16', 'LP14', 4, 22490000, ''),
+('PX16', 'LP20', 1, 20790000, ''),
+('PX16', 'LP21', 1, 25990000, ''),
+('PX17', 'LP21', 2, 25990000, ''),
+('PX18', 'LP16', 5, 22990000, ''),
+('PX18', 'LP8', 2, 18390000, ''),
+('PX19', 'LP18', 1, 24990000, ''),
+('PX19', 'LP23', 1, 15690000, ''),
+('PX19', 'PC06', 1, 9690000, ''),
+('PX19', 'PC3', 1, 8990000, ''),
+('PX2', 'LP21', 1, 25990000, ''),
+('PX2', 'LP6', 2, 17490000, ''),
+('PX2', 'PC06', 1, 9690000, ''),
+('PX20', 'LP6', 2, 17490000, ''),
+('PX20', 'LP9', 1, 16490000, ''),
+('PX20', 'PC06', 1, 9690000, ''),
+('PX20', 'PC3', 2, 8990000, ''),
+('PX21', 'LP23', 1, 15690000, ''),
+('PX21', 'LP7', 1, 17490000, ''),
+('PX21', 'PC06', 2, 9690000, ''),
+('PX21', 'PC2', 1, 8290000, ''),
+('PX22', 'LP5', 1, 19290000, ''),
+('PX22', 'LP9', 1, 16490000, ''),
+('PX23', 'LP23', 1, 15690000, ''),
+('PX23', 'PC06', 1, 9690000, ''),
+('PX23', 'PC1', 1, 7090000, ''),
+('PX23', 'PC3', 1, 8990000, ''),
+('PX24', 'LP19', 1, 19490000, ''),
+('PX24', 'LP8', 1, 18390000, ''),
+('PX24', 'LP9', 1, 16490000, ''),
+('PX24', 'PC3', 1, 8990000, ''),
+('PX25', 'LP19', 1, 19490000, ''),
+('PX25', 'LP7', 2, 17490000, ''),
+('PX25', 'PC1', 1, 7090000, ''),
+('PX26', 'LP19', 1, 19490000, ''),
+('PX26', 'LP22', 1, 23490000, ''),
+('PX26', 'LP3', 1, 15000000, ''),
+('PX26', 'LP5', 1, 19290000, ''),
+('PX26', 'LP6', 1, 17490000, ''),
+('PX27', 'LP13', 1, 9990000, ''),
+('PX27', 'LP15', 28, 25190000, ''),
+('PX3', 'LP22', 1, 23490000, ''),
+('PX3', 'LP4', 1, 10690000, ''),
+('PX3', 'LP8', 1, 18390000, ''),
+('PX4', 'LP17', 1, 23190000, ''),
+('PX4', 'LP6', 1, 17490000, ''),
+('PX4', 'LP7', 1, 17490000, ''),
+('PX5', 'LP16', 1, 22990000, ''),
+('PX5', 'LP5', 1, 19290000, ''),
+('PX5', 'LP7', 1, 17490000, ''),
+('PX5', 'LP9', 1, 16490000, ''),
+('PX5', 'PC3', 1, 8990000, ''),
+('PX6', 'LP12', 1, 13090000, ''),
+('PX6', 'LP13', 1, 9990000, ''),
+('PX6', 'LP15', 1, 25190000, ''),
+('PX6', 'LP17', 1, 23190000, ''),
+('PX7', 'LP21', 1, 25990000, ''),
+('PX7', 'LP5', 1, 19290000, ''),
+('PX7', 'PC1', 1, 7090000, ''),
+('PX8', 'LP24', 1, 21490000, ''),
+('PX8', 'LP3', 1, 15000000, ''),
+('PX8', 'LP5', 1, 19290000, ''),
+('PX8', 'LP8', 1, 18390000, ''),
+('PX8', 'PC1', 1, 7090000, ''),
+('PX9', 'LP21', 1, 25990000, ''),
+('PX9', 'LP22', 1, 23490000, ''),
+('PX9', 'LP4', 1, 10690000, '');
 
 -- --------------------------------------------------------
 
@@ -298,44 +300,45 @@ CREATE TABLE `maytinh` (
   `kichThuocMan` double DEFAULT NULL,
   `dungLuongPin` varchar(50) DEFAULT NULL,
   `xuatXu` varchar(50) DEFAULT NULL,
-  `trangThai` int(11) DEFAULT NULL
+  `trangThai` int(11) DEFAULT NULL,
+  `baoHanh` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `maytinh`
 --
 
-INSERT INTO `maytinh` (`maMay`, `tenMay`, `soLuong`, `tenCpu`, `ram`, `cardManHInh`, `gia`, `mainBoard`, `congSuatNguon`, `loaiMay`, `rom`, `kichThuocMan`, `dungLuongPin`, `xuatXu`, `trangThai`) VALUES
-('LP10', 'Laptop Lenovo IdeaPad Gaming 3', 36, 'Intel Core i5 12500H', '16 GB', 'NVIDIA GeForce RTX 3050', 23490000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 0),
-('LP12', 'Laptop MSI Modern 14 B11MOU-1028VN', 23, 'Intel Core i3 115G4', '8 GB', 'Intel UHD Graphics', 13090000, NULL, NULL, 'Laptop', '256 GB', 14, '3 Cell', 'Trung Quốc', 0),
-('LP13', 'Laptop HP 15s-fq2663TU', 18, 'Intel Core i3 1115G4', '4 GB', 'Intel UHD Graphics', 9990000, NULL, NULL, 'Laptop', '256 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP14', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 3, 'Intel Core i5 12500H', '16 GB', 'Intel Iris Xe Graphics', 22490000, NULL, NULL, 'Laptop', '512 GB', 16, '4 Cell', 'Trung Quốc', 1),
-('LP15', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 0, 'Intel Core i7 12700H', '16 GB', 'Intel Iris Xe Graphics', 25190000, NULL, NULL, 'Laptop', '512 GB', 16, '75 Wh', 'Trung Quốc', 1),
-('LP16', 'Laptop Acer Nitro Gaming AN515-57-54MV', 62, 'Intel Core i5 11400H', '8', 'NVIDIA GeForce RTX 3050', 22990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell ', 'Trung Quốc', 1),
-('LP17', 'Laptop MSI Gaming Katana GF66 12UCK-815VN', 22, 'Intel Core i5 12450H', '8 GB', 'Intel UHD Graphics', 23190000, NULL, NULL, 'Laptop', '512 GB', 15.6, '53.5 Wh', 'Trung Quốc', 1),
-('LP18', 'Laptop Asus TUF Gaming FX517ZC-HN077W', 23, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050', 24990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1),
-('LP19', 'Laptop HP Gaming Victus 16-e0175AX', 18, 'AMD Ryzen 5 5600H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 19490000, NULL, NULL, 'Laptop', '512 GB', 16.1, '4 Cell', 'Trung Quốc', 1),
-('LP20', 'Laptop MSI GF63 Thin 11UC-444VN', 19, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce RTX 3050', 20790000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP21', 'Laptop Asus TUF Gaming FX517ZE-HN045W', 18, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 25990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1),
-('LP22', 'Laptop Lenovo Yoga Slim 7 Pro 14IHU5O', 20, 'Intel Core i5 11300H', '16 GB', 'Intel Iris Xe Graphics', 23490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell ', 'Trung Quốc', 1),
-('LP23', 'Laptop Gigabyte U4 UD-50VN823SO', 37, 'Intel Core i5 1155G7', '16 GB', 'Intel Iris Xe Graphics', 15690000, NULL, NULL, 'Laptop', '512 GB', 14, '36 Wh', 'Trung Quốc', 1),
-('LP24', 'Laptop Dell Vostro V5410 i5', 34, 'Intel Core i5 11320H', '8 GB', 'Intel Iris Xe Graphics', 21490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell', 'Trung Quốc', 1),
-('LP25', 'Laptop MSI Gaming GF63 Thin 11SC-666VN', 53, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce GTX 1650', 18390000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP3', 'Lenovo ThinkPad E14', 83, 'Intel Core i5 11G352', '8GB', 'OnBoard', 15000000, NULL, NULL, 'Laptop', '521GB', 14, '45Wh', 'Trung Quốc', 1),
-('LP4', 'Lenovo Ideapad 3 15ITL6', 118, 'Intel Core i3 1115G4', '8GB', 'Onboard', 10690000, NULL, NULL, 'Laptop', '512GB', 15.6, '35Wh', 'Trung Quốc', 1),
-('LP5', 'Gigabyte Gaming G5 GD', 11, 'Intel Core i5 11400H', '16GB', 'NVIDIA GeForce RTX 3050 4GB', 19290000, NULL, NULL, 'Laptop', '512GB', 15.6, '50Wh', 'Trung Quốc', 1),
-('LP6', 'MSI Gaming GF63 Thin 11SC-1090VN', 90, 'Intel Core i5 11400H', '8GB', 'NVIDIA GeForce GTX 1650 4GB', 17490000, NULL, NULL, 'Laptop', '512GB', 15.6, '50Wh', 'Trung Quốc', 1),
-('LP7', 'Laptop Asus TUF Gaming FX506LHB-HN188W', 19, 'Intel Core i5 10300H', '8 GB', 'NVIDIA GeForce GTX 1650', 17490000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP8', 'Laptop MSI Gaming GF63 Thin 11SC-1090VN', 60, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce GTX 1650 4GB', 18390000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1),
-('LP9', 'Laptop Asus TUF Gaming FA506IHRB-HN019W', 25, 'AMD Ryzen 5 4600H', '8 GB', 'NVIDIA GeForce GTX 1650', 16490000, NULL, NULL, 'Laptop', '512 GB', 12, '3 cell', 'Trung Quốc', 1),
-('PC06', 'PC E-Power Office 08', 19, 'Intel Core i5 11400', '16 GB', 'Intel UHD Graphics 730', 9690000, 'Intel H510', 9690000, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1),
-('PC1', 'PC E-Power Office 04', 16, 'Intel Core i3 10105', '8GB', 'Intel HD Graphics 630', 7090000, 'Intel H510', 0, 'Laptop', '240GB', NULL, NULL, 'Việt Nam', 1),
-('PC2', 'PC E-Power Office 05', 30, 'Intel Core i5 10400', '8 GB', 'Intel UHD Graphics 630', 8290000, 'Intel H510', 300, 'PC - Lắp ráp', '8 GB', NULL, NULL, 'Việt Nam', 1),
-('PC3', 'PC E-Power Office 07', 19, 'Intel Core i5 11400', '8 GB', 'Intel UHD Graphics 730', 8990000, 'Intel H510', 8990000, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1),
-('PC30', 'ASUS Vivobook', 1, ' Ryzen 7 5800H ', '16GB', 'GTX 3060', 25000000, NULL, NULL, 'Laptop', '512GB', 24, '3000', 'Việt Nam', 1),
-('PC4', 'PC Gaming E-Power G1650', 71, 'Intel Core i3 10100F', '8 GB', 'Intel UHD Graphics 730', 11990000, 'Intel H510', 300, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1),
-('PC5', 'PC E-Power Office 06', 33, 'Intel Core i5 10400', '16 GB', 'Intel HD Graphics 630', 9190000, 'Intel H510', 200, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1),
-('PC7', 'PC Acer Aspire AS-XC780 DT.B8ASV.006', 21, ' Intel Core i5-7400', '4GB', ' Intel HD Graphics 630 / GeForce GT 720 2GB', 11200000, 'Intel H510', 300, 'PC - Lắp ráp', '1TB', NULL, NULL, 'Việt Nam', 1);
+INSERT INTO `maytinh` (`maMay`, `tenMay`, `soLuong`, `tenCpu`, `ram`, `cardManHInh`, `gia`, `mainBoard`, `congSuatNguon`, `loaiMay`, `rom`, `kichThuocMan`, `dungLuongPin`, `xuatXu`, `trangThai`, `baoHanh`) VALUES
+('LP10', 'Laptop Lenovo IdeaPad Gaming 3', 36, 'Intel Core i5 12500H', '16 GB', 'NVIDIA GeForce RTX 3050', 23490000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 0, 0),
+('LP12', 'Laptop MSI Modern 14 B11MOU-1028VN', 23, 'Intel Core i3 115G4', '8 GB', 'Intel UHD Graphics', 13090000, NULL, NULL, 'Laptop', '256 GB', 14, '3 Cell', 'Trung Quốc', 0, 0),
+('LP13', 'Laptop HP 15s-fq2663TU', 18, 'Intel Core i3 1115G4', '4 GB', 'Intel UHD Graphics', 9990000, NULL, NULL, 'Laptop', '256 GB', 15.6, '3 Cell', 'Trung Quốc', 1, 0),
+('LP14', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 3, 'Intel Core i5 12500H', '16 GB', 'Intel Iris Xe Graphics', 22490000, NULL, NULL, 'Laptop', '512 GB', 16, '4 Cell', 'Trung Quốc', 1, 0),
+('LP15', 'Laptop Lenovo IdeaPad 5 Pro 16IAH7', 0, 'Intel Core i7 12700H', '16 GB', 'Intel Iris Xe Graphics', 25190000, NULL, NULL, 'Laptop', '512 GB', 16, '75 Wh', 'Trung Quốc', 1, 0),
+('LP16', 'Laptop Acer Nitro Gaming AN515-57-54MV', 62, 'Intel Core i5 11400H', '8', 'NVIDIA GeForce RTX 3050', 22990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell ', 'Trung Quốc', 1, 0),
+('LP17', 'Laptop MSI Gaming Katana GF66 12UCK-815VN', 22, 'Intel Core i5 12450H', '8 GB', 'Intel UHD Graphics', 23190000, NULL, NULL, 'Laptop', '512 GB', 15.6, '53.5 Wh', 'Trung Quốc', 1, 0),
+('LP18', 'Laptop Asus TUF Gaming FX517ZC-HN077W', 23, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050', 24990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1, 0),
+('LP19', 'Laptop HP Gaming Victus 16-e0175AX', 18, 'AMD Ryzen 5 5600H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 19490000, NULL, NULL, 'Laptop', '512 GB', 16.1, '4 Cell', 'Trung Quốc', 1, 0),
+('LP20', 'Laptop MSI GF63 Thin 11UC-444VN', 19, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce RTX 3050', 20790000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1, 0),
+('LP21', 'Laptop Asus TUF Gaming FX517ZE-HN045W', 18, 'Intel Core i5 12450H', '8 GB', 'NVIDIA GeForce RTX 3050 Ti', 25990000, NULL, NULL, 'Laptop', '512 GB', 15.6, '4 Cell', 'Trung Quốc', 1, 0),
+('LP22', 'Laptop Lenovo Yoga Slim 7 Pro 14IHU5O', 20, 'Intel Core i5 11300H', '16 GB', 'Intel Iris Xe Graphics', 23490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell ', 'Trung Quốc', 1, 0),
+('LP23', 'Laptop Gigabyte U4 UD-50VN823SO', 37, 'Intel Core i5 1155G7', '16 GB', 'Intel Iris Xe Graphics', 15690000, NULL, NULL, 'Laptop', '512 GB', 14, '36 Wh', 'Trung Quốc', 1, 0),
+('LP24', 'Laptop Dell Vostro V5410 i5', 34, 'Intel Core i5 11320H', '8 GB', 'Intel Iris Xe Graphics', 21490000, NULL, NULL, 'Laptop', '512 GB', 14, '4 Cell', 'Trung Quốc', 1, 0),
+('LP25', 'Laptop MSI Gaming GF63 Thin 11SC-666VN', 53, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce GTX 1650', 18390000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1, 0),
+('LP3', 'Lenovo ThinkPad E14', 83, 'Intel Core i5 11G352', '8GB', 'OnBoard', 15000000, NULL, NULL, 'Laptop', '521GB', 14, '45Wh', 'Trung Quốc', 1, 0),
+('LP4', 'Lenovo Ideapad 3 15ITL6', 118, 'Intel Core i3 1115G4', '8GB', 'Onboard', 10690000, NULL, NULL, 'Laptop', '512GB', 15.6, '35Wh', 'Trung Quốc', 1, 0),
+('LP5', 'Gigabyte Gaming G5 GD', 11, 'Intel Core i5 11400H', '16GB', 'NVIDIA GeForce RTX 3050 4GB', 19290000, NULL, NULL, 'Laptop', '512GB', 15.6, '50Wh', 'Trung Quốc', 1, 0),
+('LP6', 'MSI Gaming GF63 Thin 11SC-1090VN', 90, 'Intel Core i5 11400H', '8GB', 'NVIDIA GeForce GTX 1650 4GB', 17490000, NULL, NULL, 'Laptop', '512GB', 15.6, '50Wh', 'Trung Quốc', 1, 0),
+('LP7', 'Laptop Asus TUF Gaming FX506LHB-HN188W', 19, 'Intel Core i5 10300H', '8 GB', 'NVIDIA GeForce GTX 1650', 17490000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1, 0),
+('LP8', 'Laptop MSI Gaming GF63 Thin 11SC-1090VN', 60, 'Intel Core i5 11400H', '8 GB', 'NVIDIA GeForce GTX 1650 4GB', 18390000, NULL, NULL, 'Laptop', '512 GB', 15.6, '3 Cell', 'Trung Quốc', 1, 0),
+('LP9', 'Laptop Asus TUF Gaming FA506IHRB-HN019W', 25, 'AMD Ryzen 5 4600H', '8 GB', 'NVIDIA GeForce GTX 1650', 16490000, NULL, NULL, 'Laptop', '512 GB', 12, '3 cell', 'Trung Quốc', 1, 0),
+('PC06', 'PC E-Power Office 08', 19, 'Intel Core i5 11400', '16 GB', 'Intel UHD Graphics 730', 9690000, 'Intel H510', 9690000, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC1', 'PC E-Power Office 04', 16, 'Intel Core i3 10105', '8GB', 'Intel HD Graphics 630', 7090000, 'Intel H510', 0, 'Laptop', '240GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC2', 'PC E-Power Office 05', 30, 'Intel Core i5 10400', '8 GB', 'Intel UHD Graphics 630', 8290000, 'Intel H510', 300, 'PC - Lắp ráp', '8 GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC3', 'PC E-Power Office 07', 19, 'Intel Core i5 11400', '8 GB', 'Intel UHD Graphics 730', 8990000, 'Intel H510', 8990000, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC30', 'ASUS Vivobook', 1, ' Ryzen 7 5800H ', '16GB', 'GTX 3060', 25000000, NULL, NULL, 'Laptop', '512GB', 24, '3000', 'Việt Nam', 1, 0),
+('PC4', 'PC Gaming E-Power G1650', 71, 'Intel Core i3 10100F', '8 GB', 'Intel UHD Graphics 730', 11990000, 'Intel H510', 300, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC5', 'PC E-Power Office 06', 33, 'Intel Core i5 10400', '16 GB', 'Intel HD Graphics 630', 9190000, 'Intel H510', 200, 'PC - Lắp ráp', '240 GB', NULL, NULL, 'Việt Nam', 1, 0),
+('PC7', 'PC Acer Aspire AS-XC780 DT.B8ASV.006', 21, ' Intel Core i5-7400', '4GB', ' Intel HD Graphics 630 / GeForce GT 720 2GB', 11200000, 'Intel H510', 300, 'PC - Lắp ráp', '1TB', NULL, NULL, 'Việt Nam', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -433,40 +436,41 @@ CREATE TABLE `phieuxuat` (
   `maPhieu` varchar(50) NOT NULL,
   `thoiGianTao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `nguoiTao` varchar(50) NOT NULL,
-  `tongTien` double NOT NULL
+  `tongTien` double NOT NULL,
+  `companyname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phieuxuat`
 --
 
-INSERT INTO `phieuxuat` (`maPhieu`, `thoiGianTao`, `nguoiTao`, `tongTien`) VALUES
-('PX1', '2025-10-24 01:00:00', 'admin', 291860000),
-('PX10', '2025-10-24 07:00:00', 'admin', 57160000),
-('PX12', '2025-10-24 07:00:00', 'admin', 45370000),
-('PX13', '2025-10-24 08:00:00', 'admin', 109420000),
-('PX14', '2025-10-24 08:00:00', 'admin', 78650000),
-('PX15', '2025-10-24 12:00:00', 'admin', 86850000),
-('PX16', '2025-10-24 14:00:00', 'admin', 136740000),
-('PX17', '2025-10-24 14:00:00', 'admin', 51980000),
-('PX18', '2025-10-24 15:00:00', 'admin', 151730000),
-('PX19', '2025-10-24 16:00:00', 'Admin', 59360000),
-('PX2', '2025-10-24 04:00:00', 'admin', 70660000),
-('PX20', '2025-10-24 16:00:00', 'Admin', 79140000),
-('PX21', '2025-10-24 16:00:00', 'Admin', 60850000),
-('PX22', '2025-10-24 16:00:00', 'Admin', 35780000),
-('PX23', '2025-10-24 16:00:00', 'Admin', 41460000),
-('PX24', '2025-10-24 16:00:00', 'Admin', 63360000),
-('PX25', '2025-10-24 16:00:00', 'Admin', 92550000),
-('PX26', '2025-10-24 08:08:58', 'admin', 94760000),
-('PX27', '2025-10-31 03:53:05', 'Admin', 715310000),
-('PX3', '2025-10-24 04:00:00', 'admin', 89350000),
-('PX4', '2025-10-24 04:00:00', 'admin', 58170000),
-('PX5', '2025-10-24 06:00:00', 'admin', 85250000),
-('PX6', '2025-10-24 06:00:00', 'admin', 71460000),
-('PX7', '2025-10-24 06:00:00', 'admin', 52370000),
-('PX8', '2025-10-24 07:00:00', 'admin', 39880000),
-('PX9', '2025-10-24 07:00:00', 'admin', 36680000);
+INSERT INTO `phieuxuat` (`maPhieu`, `thoiGianTao`, `nguoiTao`, `tongTien`, `companyname`) VALUES
+('PX1', '2025-10-24 01:00:00', 'admin', 291860000, ''),
+('PX10', '2025-10-24 07:00:00', 'admin', 57160000, ''),
+('PX12', '2025-10-24 07:00:00', 'admin', 45370000, ''),
+('PX13', '2025-10-24 08:00:00', 'admin', 109420000, ''),
+('PX14', '2025-10-24 08:00:00', 'admin', 78650000, ''),
+('PX15', '2025-10-24 12:00:00', 'admin', 86850000, ''),
+('PX16', '2025-10-24 14:00:00', 'admin', 136740000, ''),
+('PX17', '2025-10-24 14:00:00', 'admin', 51980000, ''),
+('PX18', '2025-10-24 15:00:00', 'admin', 151730000, ''),
+('PX19', '2025-11-04 06:50:04', 'admin', 59360000, ''),
+('PX2', '2025-10-24 04:00:00', 'admin', 70660000, ''),
+('PX20', '2025-11-04 06:50:08', 'admin', 79140000, ''),
+('PX21', '2025-11-04 06:50:11', 'admin', 60850000, ''),
+('PX22', '2025-11-04 06:50:14', 'admin', 35780000, ''),
+('PX23', '2025-11-04 06:50:18', 'admin', 41460000, ''),
+('PX24', '2025-11-04 06:50:21', 'admin', 63360000, ''),
+('PX25', '2025-11-04 06:50:25', 'admin', 92550000, ''),
+('PX26', '2025-10-24 08:08:58', 'admin', 94760000, ''),
+('PX27', '2025-11-04 06:50:28', 'admin', 715310000, ''),
+('PX3', '2025-10-24 04:00:00', 'admin', 89350000, ''),
+('PX4', '2025-10-24 04:00:00', 'admin', 58170000, ''),
+('PX5', '2025-10-24 06:00:00', 'admin', 85250000, ''),
+('PX6', '2025-10-24 06:00:00', 'admin', 71460000, ''),
+('PX7', '2025-10-24 06:00:00', 'admin', 52370000, ''),
+('PX8', '2025-10-24 07:00:00', 'admin', 39880000, ''),
+('PX9', '2025-10-24 07:00:00', 'admin', 36680000, '');
 
 -- --------------------------------------------------------
 
@@ -498,22 +502,23 @@ INSERT INTO `promotion` (`tenkhuyenmai`, `chitietkhuyenmai`, `percent`) VALUES
 --
 
 CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `companyname` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `poin` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `address` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `poin` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `user`
 --
 
-INSERT INTO `user` (`companyname`, `address`, `phone_number`, `poin`) VALUES
-('Công ty ABC', '123 Đường A, Quận 1, TP. HCM', '0901234567', 100),
-('Tập đoàn XYZ', '456 Đường B, Quận Hoàn Kiếm, Hà Nội', '0912345678', 250),
-('Cửa hàng Tiện lợi Nhanh', '789 Đường C, Quận Hải Châu, Đà Nẵng', '0987654321', 50),
-('Cửa hàng mày tính Jeff Jr', '101 Đường D, Quận Ninh Kiều, Cần Thơ', '0939111222', 175),
-('FPT Store', '202 Đường E, Quận 3, TP. HCM', '0905555888', 80);
+INSERT INTO `user` (`id`, `companyname`, `address`, `phone_number`, `poin`) VALUES
+(1, 'Công ty ABC', '123 Đường A, Quận 1, TP. HCM', '0901234567', 100),
+(2, 'Tập đoàn XYZ', '456 Đường B, Quận Hoàn Kiếm, Hà Nội', '0912345678', 250),
+(3, 'Cửa hàng Tiện lợi Nhanh', '789 Đường C, Quận Hải Châu, Đà Nẵng', '0987654321', 50),
+(4, 'Cửa hàng máy tính Jeff Jr', '101 Đường D, Quận Ninh Kiều, Cần Thơ', '0939111222', 175),
+(5, 'FPT Store', '202 Đường E, Quận 3, TP. HCM', '0905555888', 80);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -565,6 +570,22 @@ ALTER TABLE `phieunhap`
 ALTER TABLE `phieuxuat`
   ADD PRIMARY KEY (`maPhieu`),
   ADD KEY `FK_PhieuXuat_Account` (`nguoiTao`);
+
+--
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

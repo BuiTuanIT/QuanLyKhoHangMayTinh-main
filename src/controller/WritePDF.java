@@ -223,12 +223,16 @@ public class WritePDF {
             Paragraph para1 = new Paragraph(new Phrase("Mã phiếu: " + mapn, fontData));
             Paragraph para2 = new Paragraph(new Phrase("Thời gian tạo: " + formatDate.format(pn.getThoiGianTao()), fontData));
             Paragraph para3 = new Paragraph(new Phrase("Người tạo: " + AccountDAO.getInstance().selectById(pn.getNguoiTao()).getFullName(), fontData));
+            String companyName = pn.getCompanyName() != null ? pn.getCompanyName() : "—";
+            Paragraph para4 = new Paragraph(new Phrase("Khách hàng: " + companyName, fontData));
             para1.setIndentationLeft(40);
             para2.setIndentationLeft(40);
             para3.setIndentationLeft(40);
+            para4.setIndentationLeft(40);
             document.add(para1);
             document.add(para2);
             document.add(para3);
+            document.add(para4);
             document.add(Chunk.NEWLINE);//add hang trong de tao khoang cach
 
             //Tao table cho cac chi tiet cua hoa don

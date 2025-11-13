@@ -24,12 +24,13 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO PhieuXuat (maPhieu, thoiGianTao, nguoiTao, tongTien) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO PhieuXuat (maPhieu, thoiGianTao, nguoiTao, tongTien, companyname) VALUES (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaPhieu());
             pst.setTimestamp(2, t.getThoiGianTao());
             pst.setString(3, t.getNguoiTao());
             pst.setDouble(4, t.getTongTien());
+            pst.setString(5, t.getCompanyName());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -44,13 +45,14 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE PhieuXuat SET maPhieu=?, thoiGianTao=?, nguoiTao=?, tongTien = ? WHERE maPhieu=?";
+            String sql = "UPDATE PhieuXuat SET maPhieu=?, thoiGianTao=?, nguoiTao=?, tongTien = ?, companyname = ? WHERE maPhieu=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaPhieu());
             pst.setTimestamp(2, t.getThoiGianTao());
             pst.setString(3, t.getNguoiTao());
             pst.setDouble(4, t.getTongTien());
-            pst.setString(5, t.getMaPhieu());
+            pst.setString(5, t.getCompanyName());
+            pst.setString(6, t.getMaPhieu());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -90,7 +92,8 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
                 Timestamp thoiGianTao = rs.getTimestamp("thoiGianTao");
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
-                PhieuXuat p = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien);
+                String companyName = rs.getString("companyname");
+                PhieuXuat p = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
                 ketQua.add(p);
             }
         } catch (Exception e) {
@@ -114,7 +117,8 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
                 Timestamp thoiGianTao = rs.getTimestamp("thoiGianTao");
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
-                ketQua = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien);
+                String companyName = rs.getString("companyname");
+                ketQua = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
             }
         } catch (Exception e) {
             // TODO: handle exception

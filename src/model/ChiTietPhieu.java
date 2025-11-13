@@ -12,15 +12,21 @@ public class ChiTietPhieu {
     private String maMay;
     private int soLuong;
     private double donGia;
+    private String companyName;
 
     public ChiTietPhieu() {
     }
 
     public ChiTietPhieu(String maPhieu, String maMay, int soLuong, double donGia) {
+        this(maPhieu, maMay, soLuong, donGia, null);
+    }
+
+    public ChiTietPhieu(String maPhieu, String maMay, int soLuong, double donGia, String companyName) {
         this.maPhieu = maPhieu;
         this.maMay = maMay;
         this.soLuong = soLuong;
         this.donGia = donGia;
+        this.companyName = companyName;
     }
 
     public String getMaPhieu() {
@@ -55,10 +61,17 @@ public class ChiTietPhieu {
         this.donGia = donGia;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return Objects.hash(maPhieu, maMay, soLuong, donGia, companyName);
     }
 
     @Override
@@ -79,6 +92,9 @@ public class ChiTietPhieu {
         if (Double.doubleToLongBits(this.donGia) != Double.doubleToLongBits(other.donGia)) {
             return false;
         }
+        if (!Objects.equals(this.companyName, other.companyName)) {
+            return false;
+        }
         if (!Objects.equals(this.maPhieu, other.maPhieu)) {
             return false;
         }
@@ -87,8 +103,8 @@ public class ChiTietPhieu {
 
     @Override
     public String toString() {
-        return "ChiTietPhieu{" + "maPhieu=" + maPhieu + ", maMay=" + maMay + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
+        return "ChiTietPhieu{" + "maPhieu=" + maPhieu + ", maMay=" + maMay + ", soLuong=" + soLuong + ", donGia="
+                + donGia + ", companyName=" + companyName + '}';
     }
 
-    
 }

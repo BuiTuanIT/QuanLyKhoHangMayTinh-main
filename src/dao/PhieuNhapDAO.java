@@ -94,7 +94,8 @@ public class PhieuNhapDAO implements DAOInterface<PhieuNhap> {
                 String nguoiTao = rs.getString("nguoiTao");
                 String maNhaCungCap = rs.getString("maNhaCungCap");
                 double tongTien = rs.getDouble("tongTien");
-                PhieuNhap p = new PhieuNhap(maNhaCungCap, maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
+                PhieuNhap p = new PhieuNhap(maNhaCungCap, maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
                 ketQua.add(p);
             }
         } catch (Exception e) {
@@ -119,7 +120,8 @@ public class PhieuNhapDAO implements DAOInterface<PhieuNhap> {
                 String nguoiTao = rs.getString("nguoiTao");
                 String maNhaCungCap = rs.getString("maNhaCungCap");
                 double tongTien = rs.getDouble("tongTien");
-                ketQua = new PhieuNhap(maNhaCungCap, maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
+                ketQua = new PhieuNhap(maNhaCungCap, maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -132,16 +134,27 @@ public class PhieuNhapDAO implements DAOInterface<PhieuNhap> {
         ArrayList<Phieu> ketQua = new ArrayList<Phieu>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maPhieu,thoiGianTao,nguoiTao,tongTien FROM PhieuNhap UNION SELECT * FROM PhieuXuat WHERE nguoiTao = ? ORDER BY thoiGianTao DESC";
+            String sql = """
+                    SELECT maPhieu, thoiGianTao, nguoiTao, tongTien
+                    FROM PhieuNhap
+                    WHERE nguoiTao = ?
+                    UNION ALL
+                    SELECT maPhieu, thoiGianTao, nguoiTao, tongTien
+                    FROM PhieuXuat
+                    WHERE nguoiTao = ?
+                    ORDER BY thoiGianTao DESC
+                    """;
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, acc);
+            pst.setString(2, acc);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 String maPhieu = rs.getString("maPhieu");
                 Timestamp thoiGianTao = rs.getTimestamp("thoiGianTao");
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
-                Phieu p = new Phieu(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
+                Phieu p = new Phieu(maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
                 ketQua.add(p);
             }
         } catch (Exception e) {
@@ -155,7 +168,14 @@ public class PhieuNhapDAO implements DAOInterface<PhieuNhap> {
         ArrayList<Phieu> ketQua = new ArrayList<Phieu>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maPhieu,thoiGianTao,nguoiTao,tongTien FROM PhieuNhap UNION SELECT * FROM PhieuXuat ORDER BY thoiGianTao DESC";
+            String sql = """
+                    SELECT maPhieu, thoiGianTao, nguoiTao, tongTien
+                    FROM PhieuNhap
+                    UNION ALL
+                    SELECT maPhieu, thoiGianTao, nguoiTao, tongTien
+                    FROM PhieuXuat
+                    ORDER BY thoiGianTao DESC
+                    """;
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -163,7 +183,8 @@ public class PhieuNhapDAO implements DAOInterface<PhieuNhap> {
                 Timestamp thoiGianTao = rs.getTimestamp("thoiGianTao");
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
-                Phieu p = new Phieu(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
+                Phieu p = new Phieu(maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuNhapDAO.getInstance().selectAll(maPhieu), tongTien);
                 ketQua.add(p);
             }
         } catch (Exception e) {

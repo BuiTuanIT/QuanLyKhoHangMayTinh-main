@@ -9,8 +9,8 @@ import controller.SearchProduct;
 import dao.AccountDAO;
 import dao.ChiTietPhieuXuatDAO;
 import java.sql.Timestamp;
+import dao.KhachHangDAO;
 import dao.MayTinhDAO;
-import dao.NhaCungCapDAO;
 import dao.PhieuXuatDAO;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import model.ChiTietPhieu;
+import model.KhachHang;
 import model.MayTinh;
-import model.NhaCungCap;
 import model.PhieuXuat;
 
 /**
@@ -41,7 +41,10 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
     private ArrayList<ChiTietPhieu> CTPhieu;
     private ArrayList<ChiTietPhieu> CTPhieuOld;
     private PhieuXuatForm parent;
-    private static final ArrayList<NhaCungCap> arrNcc = NhaCungCapDAO.getInstance().selectAll();
+    private ArrayList<KhachHang> customers;
+    private KhachHang selectedCustomer;
+    private KhachHang originalCustomer;
+    private int originalTotalQuantity;
 
     public UpdatePhieuXuat(javax.swing.JInternalFrame parent, javax.swing.JFrame owner, boolean modal) throws UnsupportedLookAndFeelException {
         super(owner, modal);
@@ -54,6 +57,21 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         this.phieuxuat = this.parent.getPhieuXuatSelect();
         CTPhieu = ChiTietPhieuXuatDAO.getInstance().selectAll(phieuxuat.getMaPhieu());
         CTPhieuOld = ChiTietPhieuXuatDAO.getInstance().selectAll(phieuxuat.getMaPhieu());
+        originalTotalQuantity = 0;
+        for (ChiTietPhieu ct : CTPhieuOld) {
+            originalTotalQuantity += ct.getSoLuong();
+        }
+        initCustomerData();
+        cboKhachHang.addActionListener(evt -> {
+            if (!cboKhachHang.isEnabled()) {
+                return;
+            }
+            int index = cboKhachHang.getSelectedIndex();
+            if (customers != null && index >= 0 && index < customers.size()) {
+                selectedCustomer = customers.get(index);
+                syncCompanyToDetails();
+            }
+        });
         // Hien thi thong tin
         initTable();
         loadDataToTableProduct(allProduct);
@@ -69,7 +87,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
 
     private void displayInfo() {
         txtMaPhieu.setText(phieuxuat.getMaPhieu());
-        textTongTien.setText(formatter.format(phieuxuat.getTongTien()) + "đ");
+        textTongTien.setText(formatter.format(tinhTongTien()) + "đ");
         txtNguoiTao.setText(AccountDAO.getInstance().selectById(phieuxuat.getNguoiTao()).getUser());
     }
 
@@ -85,6 +103,58 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         tblNhapHang.getColumnModel().getColumn(1).setPreferredWidth(10);
         tblNhapHang.getColumnModel().getColumn(2).setPreferredWidth(250);
         tblSanPham.setDefaultEditor(Object.class, null);
+    }
+
+    private void initCustomerData() {
+        customers = KhachHangDAO.getInstance().selectAll();
+        cboKhachHang.removeAllItems();
+        String companyName = phieuxuat != null ? phieuxuat.getCompanyName() : null;
+        if (customers == null || customers.isEmpty()) {
+            cboKhachHang.addItem("Chưa có khách hàng");
+            cboKhachHang.setEnabled(false);
+            selectedCustomer = null;
+            originalCustomer = null;
+        } else {
+            cboKhachHang.setEnabled(true);
+            int indexToSelect = -1;
+            for (int i = 0; i < customers.size(); i++) {
+                KhachHang kh = customers.get(i);
+                cboKhachHang.addItem(kh.getCompanyName());
+                if (indexToSelect == -1 && companyName != null && companyName.equals(kh.getCompanyName())) {
+                    indexToSelect = i;
+                }
+            }
+            if (indexToSelect == -1) {
+                indexToSelect = 0;
+            }
+            cboKhachHang.setSelectedIndex(indexToSelect);
+            selectedCustomer = customers.get(indexToSelect);
+            originalCustomer = null;
+            if (companyName != null) {
+                for (KhachHang kh : customers) {
+                    if (companyName.equals(kh.getCompanyName())) {
+                        originalCustomer = kh;
+                        break;
+                    }
+                }
+            }
+            syncCompanyToDetails();
+        }
+    }
+
+    private void syncCompanyToDetails() {
+        String company = selectedCustomer != null ? selectedCustomer.getCompanyName() : null;
+        for (ChiTietPhieu ct : CTPhieu) {
+            ct.setCompanyName(company);
+        }
+    }
+
+    private int calculateTotalQuantity(ArrayList<ChiTietPhieu> list) {
+        int total = 0;
+        for (ChiTietPhieu ct : list) {
+            total += ct.getSoLuong();
+        }
+        return total;
     }
 
     private void loadDataToTableProduct(ArrayList<MayTinh> arrProd) {
@@ -126,6 +196,8 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
     }
 
     private void loadDataToTableNhapHang() {
+        syncCompanyToDetails();
+        double sum = 0;
         try {
             DefaultTableModel tblNhapHangmd = (DefaultTableModel) tblNhapHang.getModel();
             tblNhapHangmd.setRowCount(0);
@@ -134,9 +206,11 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
                 tblNhapHangmd.addRow(new Object[]{
                     i + 1, CTPhieu.get(i).getMaMay(), findMayTinh(CTPhieu.get(i).getMaMay()).getTenMay(), CTPhieu.get(i).getSoLuong(), formatter.format(CTPhieu.get(i).getDonGia()) + "đ"
                 });
+                sum += CTPhieu.get(i).getDonGia() * CTPhieu.get(i).getSoLuong();
             }
         } catch (Exception e) {
         }
+        textTongTien.setText(formatter.format(sum) + "đ");
     }
 
     /**
@@ -154,6 +228,8 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         txtMaPhieu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtNguoiTao = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cboKhachHang = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNhapHang = new javax.swing.JTable();
         btnNhapHang = new javax.swing.JButton();
@@ -199,6 +275,14 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         txtNguoiTao.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
         jPanel2.add(txtNguoiTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 390, 36));
 
+        jLabel2.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
+        jLabel2.setText("Khách hàng");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        cboKhachHang.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
+        cboKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(cboKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 390, 36));
+
         tblNhapHang.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
         tblNhapHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,7 +294,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblNhapHang);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 580, 350));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 580, 330));
 
         btnNhapHang.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
         btnNhapHang.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
@@ -243,7 +327,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
                 deleteProductActionPerformed(evt);
             }
         });
-        jPanel2.add(deleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 520, 160, 40));
+        jPanel2.add(deleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, 160, 40));
 
         jButton1.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_edit_25px.png"))); // NOI18N
@@ -254,7 +338,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 520, -1, 40));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, -1, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 630, 750));
 
@@ -389,6 +473,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         if (CTPhieu.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để xuất hàng !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
+            syncCompanyToDetails();
             // Set so luong san pham cua tung loai ve ban dau        
             for (var ct : CTPhieuOld) {
                 MayTinhDAO.getInstance().updateSoLuong(ct.getMaMay(), MayTinhDAO.getInstance().selectById(ct.getMaMay()).getSoLuong() + ct.getSoLuong());
@@ -402,13 +487,39 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
             long now = System.currentTimeMillis();
             Timestamp sqlTimestamp = new Timestamp(now);
             // Tao doi tuong phieu nhap
-            PhieuXuat pn = new PhieuXuat(phieuxuat.getMaPhieu(), sqlTimestamp, txtNguoiTao.getText(), CTPhieu, tinhTongTien());
+            String companyName = selectedCustomer != null ? selectedCustomer.getCompanyName() : null;
+            PhieuXuat pn = new PhieuXuat(phieuxuat.getMaPhieu(), sqlTimestamp, txtNguoiTao.getText(), CTPhieu, tinhTongTien(), companyName);
             try {
                 PhieuXuatDAO.getInstance().update(pn);
-                ChiTietPhieuXuatDAO.getInstance().delete(CTPhieuOld.get(CTPhieuOld.size() - 1));
+                ChiTietPhieu dummy = new ChiTietPhieu(phieuxuat.getMaPhieu(), "", 0, 0);
+                ChiTietPhieuXuatDAO.getInstance().delete(dummy);
+                int newTotalQuantity = calculateTotalQuantity(CTPhieu);
                 for (var i : CTPhieu) {
                     ChiTietPhieuXuatDAO.getInstance().insert(i);
                 }
+                if (originalCustomer != null && selectedCustomer != null && originalCustomer.getIdUser() == selectedCustomer.getIdUser()) {
+                    int basePoint = originalCustomer.getPoin();
+                    int updatedPoint = basePoint - originalTotalQuantity + newTotalQuantity;
+                    if (updatedPoint < 0) {
+                        updatedPoint = 0;
+                    }
+                    KhachHangDAO.getInstance().updatePoin(originalCustomer.getIdUser(), updatedPoint);
+                    originalCustomer.setPoin(updatedPoint);
+                    selectedCustomer.setPoin(updatedPoint);
+                } else {
+                    if (originalCustomer != null) {
+                        int updatedOriginal = Math.max(0, originalCustomer.getPoin() - originalTotalQuantity);
+                        KhachHangDAO.getInstance().updatePoin(originalCustomer.getIdUser(), updatedOriginal);
+                        originalCustomer.setPoin(updatedOriginal);
+                    }
+                    if (selectedCustomer != null) {
+                        int updatedNew = selectedCustomer.getPoin() + newTotalQuantity;
+                        KhachHangDAO.getInstance().updatePoin(selectedCustomer.getIdUser(), updatedNew);
+                        selectedCustomer.setPoin(updatedNew);
+                    }
+                }
+                originalTotalQuantity = newTotalQuantity;
+                originalCustomer = selectedCustomer;
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công !");
                 this.parent.loadDataToTable();
                 this.dispose();
@@ -475,10 +586,14 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(this, "Số lượng máy không đủ !");
                         } else {
                             mtl.setSoLuong(mtl.getSoLuong() + soluong);
+                            if (selectedCustomer != null) {
+                                mtl.setCompanyName(selectedCustomer.getCompanyName());
+                            }
                         }
                     } else {
                         MayTinh mt = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
-                        ChiTietPhieu ctp = new ChiTietPhieu(phieuxuat.getMaPhieu(), mt.getMaMay(), soluong, mt.getGia());
+                        String company = selectedCustomer != null ? selectedCustomer.getCompanyName() : phieuxuat.getCompanyName();
+                        ChiTietPhieu ctp = new ChiTietPhieu(phieuxuat.getMaPhieu(), mt.getMaMay(), soluong, mt.getGia(), company);
                         CTPhieu.add(ctp);
                     }
                     loadDataToTableNhapHang();
@@ -536,8 +651,10 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
     private javax.swing.JButton btnNhapHang;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton deleteProduct;
+    private javax.swing.JComboBox<String> cboKhachHang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

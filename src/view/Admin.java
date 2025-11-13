@@ -60,6 +60,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }
 
     /**
@@ -95,6 +96,8 @@ public class Admin extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         ThongKe = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        KhachHang = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         Account = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         MainContent = new javax.swing.JPanel();
@@ -465,6 +468,40 @@ public class Admin extends javax.swing.JFrame {
 
         NavbarMenu.add(ThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 240, -1));
 
+        KhachHang.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        KhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        KhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                KhachHangMouseClicked(evt);
+            }
+
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                KhachHangMousePressed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_test_account_25px.png"))); // NOI18N
+        jLabel15.setText("KHÁCH HÀNG");
+
+        javax.swing.GroupLayout KhachHangLayout = new javax.swing.GroupLayout(KhachHang);
+        KhachHang.setLayout(KhachHangLayout);
+        KhachHangLayout.setHorizontalGroup(
+                KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(KhachHangLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel15)
+                                .addContainerGap(46, Short.MAX_VALUE)));
+        KhachHangLayout.setVerticalGroup(
+                KhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(KhachHangLayout.createSequentialGroup()
+                                .addContainerGap(9, Short.MAX_VALUE)
+                                .addComponent(jLabel15)
+                                .addContainerGap()));
+
+        NavbarMenu.add(KhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 240, -1));
+
         Account.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
         Account.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Account.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -529,6 +566,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
         MainContent.removeAll();
         ProductForm p = new ProductForm();
         MainContent.add(p).setVisible(true);
@@ -545,6 +583,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_NhaCungCapMousePressed
 
     private void NhapHangMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_NhapHangMousePressed
@@ -558,6 +597,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_NhapHangMousePressed
 
     private void PhieuNhapMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PhieuNhapMousePressed
@@ -571,6 +611,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_PhieuNhapMousePressed
 
     private void XuatHangMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_XuatHangMousePressed
@@ -584,6 +625,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_XuatHangMousePressed
 
     private void PhieuXuatMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PhieuXuatMousePressed
@@ -597,6 +639,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_PhieuXuatMousePressed
 
     private void SanPhamMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_SanPhamMouseClicked
@@ -617,6 +660,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(ClickedColor);
         TaiKhoan1.setBackground(DefaultColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_TonKhoMousePressed
 
     private void DangXuatMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_DangXuatMousePressed
@@ -702,6 +746,7 @@ public class Admin extends javax.swing.JFrame {
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(ClickedColor);
         ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_TaiKhoan1MousePressed
 
     private void ThongKeMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_ThongKeMouseClicked
@@ -722,7 +767,29 @@ public class Admin extends javax.swing.JFrame {
         NhaCungCap.setBackground(DefaultColor);
         TonKho.setBackground(DefaultColor);
         TaiKhoan1.setBackground(DefaultColor);
+        KhachHang.setBackground(DefaultColor);
     }// GEN-LAST:event_ThongKeMousePressed
+
+    private void KhachHangMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_KhachHangMouseClicked
+        // TODO add your handling code here:
+        KhachHangForm kh = new KhachHangForm();
+        MainContent.removeAll();
+        MainContent.add(kh).setVisible(true);
+    }// GEN-LAST:event_KhachHangMouseClicked
+
+    private void KhachHangMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_KhachHangMousePressed
+        // TODO add your handling code here:
+        SanPham.setBackground(DefaultColor);
+        PhieuNhap.setBackground(DefaultColor);
+        NhapHang.setBackground(DefaultColor);
+        XuatHang.setBackground(DefaultColor);
+        PhieuXuat.setBackground(DefaultColor);
+        NhaCungCap.setBackground(DefaultColor);
+        TonKho.setBackground(DefaultColor);
+        TaiKhoan1.setBackground(DefaultColor);
+        ThongKe.setBackground(DefaultColor);
+        KhachHang.setBackground(ClickedColor);
+    }// GEN-LAST:event_KhachHangMousePressed
 
     private void AccountMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_AccountMouseClicked
         // TODO add your handling code here:
@@ -788,5 +855,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel KhachHang;
+    private javax.swing.JLabel jLabel15;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,10 +76,11 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
 
     public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"STT", "Mã phiếu nhập", "Người tạo", "Thời gian tạo", "Tổng tiền"};
+        String[] headerTbl = new String[]{"STT", "Mã phiếu xuất", "Người tạo", "Khách hàng", "Thời gian tạo", "Tổng tiền"};
         tblModel.setColumnIdentifiers(headerTbl);
         tblPhieuXuat.setModel(tblModel);
         tblPhieuXuat.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tblPhieuXuat.getColumnModel().getColumn(3).setPreferredWidth(150);
     }
 
     public void loadDataToTable() {
@@ -87,8 +88,14 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
             ArrayList<PhieuXuat> allPhieu = PhieuXuatDAO.getInstance().selectAll();
             tblModel.setRowCount(0);
             for (int i = 0; i < allPhieu.size(); i++) {
+                String companyName = allPhieu.get(i).getCompanyName() != null ? allPhieu.get(i).getCompanyName() : "—";
                 tblModel.addRow(new Object[]{
-                    i + 1, allPhieu.get(i).getMaPhieu(), AccountDAO.getInstance().selectById(allPhieu.get(i).getNguoiTao()).getFullName(), formatDate.format(allPhieu.get(i).getThoiGianTao()), formatter.format(allPhieu.get(i).getTongTien()) + "đ"
+                    i + 1,
+                    allPhieu.get(i).getMaPhieu(),
+                    AccountDAO.getInstance().selectById(allPhieu.get(i).getNguoiTao()).getFullName(),
+                    companyName,
+                    formatDate.format(allPhieu.get(i).getThoiGianTao()),
+                    formatter.format(allPhieu.get(i).getTongTien()) + "đ"
                 });
             }
         } catch (Exception e) {
@@ -213,7 +220,7 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jComboBoxS.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
-        jComboBoxS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã phiếu", "Người tạo" }));
+        jComboBoxS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã phiếu", "Người tạo", "Khách hàng" }));
         jPanel3.add(jComboBoxS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 210, 40));
 
         jTextFieldSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -486,8 +493,8 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
                 for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = excelSheet.getRow(row);
                     String maPhieu = excelRow.getCell(1).getStringCellValue();
-                    String nhaCungCap = excelRow.getCell(2).getStringCellValue();
-                    String nguoiTao = excelRow.getCell(3).getStringCellValue();
+                    String nguoiTao = excelRow.getCell(2).getStringCellValue();
+                    String khachHang = excelRow.getCell(3).getStringCellValue();
                     String dateText = excelRow.getCell(4).getStringCellValue();
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     Date dateCheck = format.parse(dateText);
@@ -496,7 +503,12 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
                     String giaoke = giaFomat.substring(0, viTri) + giaFomat.substring(viTri + 1);
                     double donGia = Double.parseDouble(giaoke);
                     table_acc.addRow(new Object[]{
-                        row, maPhieu, nhaCungCap, nguoiTao, formatDate.format(dateCheck), formatter.format(donGia) + "đ"
+                        row,
+                        maPhieu,
+                        nguoiTao,
+                        khachHang,
+                        formatDate.format(dateCheck),
+                        formatter.format(donGia) + "đ"
                     });
                 }
             } catch (FileNotFoundException ex) {
@@ -610,8 +622,14 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
         try {
             tblModel.setRowCount(0);
             for (int i = 0; i < allPhieu.size(); i++) {
+                String companyName = allPhieu.get(i).getCompanyName() != null ? allPhieu.get(i).getCompanyName() : "—";
                 tblModel.addRow(new Object[]{
-                    i + 1, allPhieu.get(i).getMaPhieu(), AccountDAO.getInstance().selectById(allPhieu.get(i).getNguoiTao()).getFullName(), formatDate.format(allPhieu.get(i).getThoiGianTao()), formatter.format(allPhieu.get(i).getTongTien()) + "đ"
+                    i + 1,
+                    allPhieu.get(i).getMaPhieu(),
+                    AccountDAO.getInstance().selectById(allPhieu.get(i).getNguoiTao()).getFullName(),
+                    companyName,
+                    formatDate.format(allPhieu.get(i).getThoiGianTao()),
+                    formatter.format(allPhieu.get(i).getTongTien()) + "đ"
                 });
             }
         } catch (Exception e) {
@@ -633,6 +651,9 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
                     break;
                 case "Người tạo":
                     result = searchNguoiTao(content);
+                    break;
+                case "Khách hàng":
+                    result = searchKhachHang(content);
                     break;
             }
         } else if (content.length() == 0) {
@@ -736,7 +757,8 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
         ArrayList<PhieuXuat> armt = PhieuXuatDAO.getInstance().selectAll();
         for (var phieu : armt) {
             if (phieu.getMaPhieu().toLowerCase().contains(text.toLowerCase())
-                    || phieu.getNguoiTao().toLowerCase().contains(text.toLowerCase())) {
+                    || phieu.getNguoiTao().toLowerCase().contains(text.toLowerCase())
+                    || (phieu.getCompanyName() != null && phieu.getCompanyName().toLowerCase().contains(text.toLowerCase()))) {
                 result.add(phieu);
             }
 
@@ -779,6 +801,17 @@ public class PhieuXuatForm extends javax.swing.JInternalFrame {
                 result.add(phieu);
             }
 
+        }
+        return result;
+    }
+
+    public ArrayList<PhieuXuat> searchKhachHang(String text) {
+        ArrayList<PhieuXuat> result = new ArrayList<>();
+        ArrayList<PhieuXuat> armt = PhieuXuatDAO.getInstance().selectAll();
+        for (var phieu : armt) {
+            if (phieu.getCompanyName() != null && phieu.getCompanyName().toLowerCase().contains(text.toLowerCase())) {
+                result.add(phieu);
+            }
         }
         return result;
     }

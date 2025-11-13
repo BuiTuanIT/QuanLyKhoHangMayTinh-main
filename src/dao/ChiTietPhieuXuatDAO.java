@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 import database.JDBCUtil;
 import model.ChiTietPhieu;
-import model.ChiTietPhieu;
-import model.Phieu;
 
 public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
 
@@ -25,12 +23,13 @@ public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "INSERT INTO ChiTietPhieuXuat (maPhieu, maMay, soLuong, donGia) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO ChiTietPhieuXuat (maPhieu, maMay, soLuong, donGia, companyname) VALUES (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaPhieu());
             pst.setString(2, t.getMaMay());
             pst.setInt(3, t.getSoLuong());
             pst.setDouble(4, t.getDonGia());
+            pst.setString(5, t.getCompanyName());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -45,14 +44,15 @@ public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE ChiTietPhieuXuat SET maPhieu=?, maMay=?, soLuong=?, donGia = ?  WHERE maPhieu=? AND maMay=?";
+            String sql = "UPDATE ChiTietPhieuXuat SET maPhieu=?, maMay=?, soLuong=?, donGia = ?, companyname = ?  WHERE maPhieu=? AND maMay=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaPhieu());
             pst.setString(2, t.getMaMay());
             pst.setInt(3, t.getSoLuong());
             pst.setDouble(4, t.getDonGia());
-            pst.setString(5, t.getMaPhieu());
-            pst.setString(6, t.getMaMay());
+            pst.setString(5, t.getCompanyName());
+            pst.setString(6, t.getMaPhieu());
+            pst.setString(7, t.getMaMay());
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -92,7 +92,8 @@ public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
                 String maMay = rs.getString("maMay");
                 int soLuong = rs.getInt("soLuong");
                 double donGia = rs.getDouble("donGia");
-                ChiTietPhieu ctp = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia);
+                String companyName = rs.getString("companyname");
+                ChiTietPhieu ctp = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia, companyName);
                 ketQua.add(ctp);
             }
             JDBCUtil.closeConnection(con);
@@ -116,7 +117,8 @@ public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
                 String maMay = rs.getString("maMay");
                 int soLuong = rs.getInt("soLuong");
                 double donGia = rs.getDouble("donGia");
-                ChiTietPhieu ctp = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia);
+                String companyName = rs.getString("companyname");
+                ChiTietPhieu ctp = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia, companyName);
                 ketQua.add(ctp);
             }
         } catch (Exception e) {
@@ -140,7 +142,8 @@ public class ChiTietPhieuXuatDAO implements DAOInterface<ChiTietPhieu> {
                 String maMay = rs.getString("maMay");
                 int soLuong = rs.getInt("soLuong");
                 double donGia = rs.getDouble("donGia");
-                ketQua = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia);
+                String companyName = rs.getString("companyname");
+                ketQua = new ChiTietPhieu(maPhieu, maMay, soLuong, donGia, companyName);
             }
         } catch (Exception e) {
             // TODO: handle exception

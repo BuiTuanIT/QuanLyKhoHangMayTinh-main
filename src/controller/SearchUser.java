@@ -4,9 +4,9 @@
  */
 package controller;
 
-import dao.UserDAO;
+import dao.KhachHangDAO;
 import java.util.ArrayList;
-import model.User;
+import model.KhachHang;
 
 public class SearchUser {
 
@@ -14,10 +14,10 @@ public class SearchUser {
         return new SearchUser();
     }
 
-    public ArrayList<User> searchTatCa(String text) {
-        ArrayList<User> result = new ArrayList<>();
-        ArrayList<User> users = UserDAO.getInstance().selectAll();
-        for (User u : users) {
+    public ArrayList<KhachHang> searchTatCa(String text) {
+        ArrayList<KhachHang> result = new ArrayList<>();
+        ArrayList<KhachHang> users = KhachHangDAO.getInstance().selectAll();
+        for (KhachHang u : users) {
             if ((u.getCompanyName() != null && u.getCompanyName().toLowerCase().contains(text.toLowerCase()))
                     || (u.getAddress() != null && u.getAddress().toLowerCase().contains(text.toLowerCase()))
                     || (u.getPhoneNumber() != null && u.getPhoneNumber().toLowerCase().contains(text.toLowerCase()))) {
@@ -27,7 +27,14 @@ public class SearchUser {
         return result;
     }
 
-    public ArrayList<User> searchByCompany(String text) {
-        return UserDAO.getInstance().searchByCompanyName(text);
+    public ArrayList<KhachHang> searchByCompany(String text) {
+        ArrayList<KhachHang> result = new ArrayList<>();
+        ArrayList<KhachHang> users = KhachHangDAO.getInstance().selectAll();
+        for (KhachHang u : users) {
+            if (u.getCompanyName() != null && u.getCompanyName().toLowerCase().contains(text.toLowerCase())) {
+                result.add(u);
+            }
+        }
+        return result;
     }
 }
