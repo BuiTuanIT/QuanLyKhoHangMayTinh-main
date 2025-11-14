@@ -45,7 +45,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 /**
  *
- * @author Tran Nhat Sinh Con lon
  */
 public class PhieuNhapForm extends javax.swing.JInternalFrame {
 

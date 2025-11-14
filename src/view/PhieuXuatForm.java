@@ -41,7 +41,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class PhieuXuatForm extends javax.swing.JInternalFrame {
 

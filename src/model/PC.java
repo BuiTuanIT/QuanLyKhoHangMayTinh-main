@@ -8,7 +8,6 @@ import java.util.Objects;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class PC extends MayTinh{
     private String mainBoard;

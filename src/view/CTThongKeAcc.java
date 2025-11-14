@@ -21,7 +21,6 @@ import model.PhieuXuat;
 
 /**
  *
- * @author Tran Nhat Sinh con lon
  */
 public class CTThongKeAcc extends javax.swing.JDialog {
 

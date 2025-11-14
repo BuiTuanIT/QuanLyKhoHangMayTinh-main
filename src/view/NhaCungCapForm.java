@@ -32,7 +32,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class NhaCungCapForm extends javax.swing.JInternalFrame {
 

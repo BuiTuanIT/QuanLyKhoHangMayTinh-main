@@ -17,7 +17,6 @@ import model.Account;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class QuanLiKho extends javax.swing.JFrame {
 

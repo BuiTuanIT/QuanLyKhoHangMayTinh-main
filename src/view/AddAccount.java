@@ -9,10 +9,6 @@ import javax.swing.JOptionPane;
 import model.Account;
 import dao.AccountDAO;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class AddAccount extends javax.swing.JDialog {
 
     /**

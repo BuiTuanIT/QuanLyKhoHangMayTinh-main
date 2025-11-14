@@ -8,7 +8,6 @@ import java.util.Objects;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class Laptop extends MayTinh{
     private double kichThuocMan;

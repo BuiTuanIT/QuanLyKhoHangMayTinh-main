@@ -37,7 +37,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class XuatHangForm extends javax.swing.JInternalFrame {
 

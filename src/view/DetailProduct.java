@@ -15,7 +15,6 @@ import model.PC;
 
 /**
  *
- * @author Tran Nhat Sinh con lon
  */
 public class DetailProduct extends javax.swing.JDialog {
 

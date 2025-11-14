@@ -1701,7 +1701,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 from = jDateChooserFromPr.getDate();
                 to = new Date();
             } else if (jDateChooserToPr.getDate() != null && jDateChooserFromPr.getDate() == null) {
-                String sDate1 = "01/01/2022";
+                String sDate1 = "01/01/2025";
                 from = ConvertDate.getInstance().ChangeFrom(new SimpleDateFormat("dd/MM/yyyy").parse(sDate1));
                 to = jDateChooserToPr.getDate();
             } else {

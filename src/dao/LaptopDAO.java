@@ -15,7 +15,6 @@ import model.MayTinh;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class LaptopDAO implements DAOInterface<Laptop> {
 

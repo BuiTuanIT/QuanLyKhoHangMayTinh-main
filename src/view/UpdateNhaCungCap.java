@@ -15,7 +15,6 @@ import model.NhaCungCap;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class UpdateNhaCungCap extends javax.swing.JDialog {
 
@@ -168,6 +167,13 @@ public class UpdateNhaCungCap extends javax.swing.JDialog {
             ncc.setTenNhaCungCap(txtTenNhaCungCap.getText());
             ncc.setSdt(txtphone1.getText());
             ncc.setDiaChi(txtDiaChi.getText());
+              if (txtMaNhaCungCap.getText().isEmpty() || txtTenNhaCungCap.getText().isEmpty() || txtphone1.getText().isEmpty() || txtDiaChi.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Vui lòng nhập đầy đủ thông tin trước khi lưu!",
+                        "Thiếu thông tin",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             NhaCungCapDAO nccDao = new NhaCungCapDAO();
             nccDao.update(ncc);
             this.dispose();

@@ -15,7 +15,6 @@ import model.PhieuXuat;
 
 /**
  *
- * @author Tran Nhat Sinh con lon
  */
 public class CTPhieuXuat extends javax.swing.JDialog {
 

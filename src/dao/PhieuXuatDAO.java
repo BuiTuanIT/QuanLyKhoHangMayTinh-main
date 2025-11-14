@@ -93,7 +93,8 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
                 String companyName = rs.getString("companyname");
-                PhieuXuat p = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
+                PhieuXuat p = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
                 ketQua.add(p);
             }
         } catch (Exception e) {
@@ -118,7 +119,8 @@ public class PhieuXuatDAO implements DAOInterface<PhieuXuat> {
                 String nguoiTao = rs.getString("nguoiTao");
                 double tongTien = rs.getDouble("tongTien");
                 String companyName = rs.getString("companyname");
-                ketQua = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao, ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
+                ketQua = new PhieuXuat(maPhieu, thoiGianTao, nguoiTao,
+                        ChiTietPhieuXuatDAO.getInstance().selectAll(maPhieu), tongTien, companyName);
             }
         } catch (Exception e) {
             // TODO: handle exception

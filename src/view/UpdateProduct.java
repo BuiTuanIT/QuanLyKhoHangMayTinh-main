@@ -15,7 +15,6 @@ import model.PC;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class UpdateProduct extends javax.swing.JDialog {
 

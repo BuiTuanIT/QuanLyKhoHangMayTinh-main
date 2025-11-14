@@ -14,7 +14,6 @@ import model.NhaCungCap;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class AddNhaCungCap extends javax.swing.JDialog {
 

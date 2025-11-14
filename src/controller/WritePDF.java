@@ -45,7 +45,6 @@ import model.PhieuXuat;
 
 /**
  *
- * @author Tran Nhat Sinh
  */
 public class WritePDF {
 
